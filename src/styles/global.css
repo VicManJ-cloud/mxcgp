@@ -77,6 +77,13 @@
   --r-chip: 999px;
   --r-campo: 16px;
 
+  /* Altura de la píldora de navegación. El héroe y las cabeceras de
+     página se suben bajo ella con margen negativo, así que este token
+     es la única fuente de verdad: cambiarlo aquí reencaja todo. */
+  --alto-logo: 2.625rem;
+  --alto-pildora: calc(var(--alto-logo) + var(--e8) * 2);
+  --alto-cabecera: calc(var(--alto-pildora) + var(--e16) * 2);
+
   /* Layout */
   --ancho: 1200px;
   --gutter: clamp(1rem, 4vw, 2.5rem);
@@ -87,6 +94,15 @@
   --sombra-flotante: 0 24px 60px rgba(0, 0, 0, 0.35),
     0 4px 12px rgba(0, 0, 0, 0.2);
   --sombra-nav: 0 8px 32px rgba(0, 0, 0, 0.25);
+}
+
+/* En pantallas estrechas el logotipo baja, y con él la altura de la
+   píldora: el token se redefine para que los márgenes negativos del
+   héroe sigan cuadrando. */
+@media (max-width: 30rem) {
+  :root {
+    --alto-logo: 2.25rem;
+  }
 }
 
 *,

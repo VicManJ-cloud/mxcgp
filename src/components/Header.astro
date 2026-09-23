@@ -92,12 +92,13 @@ const esActivo = (href) =>
   }
 
   .pildora__marca {
-    display: block;
+    display: flex;
+    align-items: center;
     flex-shrink: 0;
-    padding-block: var(--e8);
+    height: var(--alto-logo);
   }
   .pildora__marca img {
-    height: 1.75rem;
+    height: 100%;
     width: auto;
   }
 
@@ -246,9 +247,6 @@ const esActivo = (href) =>
   @media (max-width: 30rem) {
     .pildora {
       padding-left: 1rem;
-    }
-    .pildora__marca img {
-      height: 1.5rem;
     }
   }
 </style>
