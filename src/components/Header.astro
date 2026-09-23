@@ -7,21 +7,23 @@ const esActivo = (href) =>
 
 <header class="cabecera">
   <div class="cabecera__pista">
-    <div class="pildora sobre-oscuro" data-pildora>
-      <a
-        class="pildora__marca"
-        href="/"
-        aria-label={`${empresa.nombre} — Inicio`}
-      >
-        <img
-          src="/logo/mx-horizontal-negativo.png"
-          alt={empresa.nombre}
-          width="1400"
-          height="490"
-          decoding="async"
-        />
-      </a>
+    <!-- La marca vive en su propia pieza flotante, no dentro de la barra de
+         navegación: así su tamaño no queda atado a la altura del menú. -->
+    <a
+      class="marca sobre-oscuro"
+      href="/"
+      aria-label={`${empresa.nombre} — Inicio`}
+    >
+      <img
+        src="/logo/mx-horizontal-negativo.png"
+        alt={empresa.nombre}
+        width="1400"
+        height="490"
+        decoding="async"
+      />
+    </a>
 
+    <div class="pildora sobre-oscuro">
       <nav class="pildora__nav" id="menu-principal" aria-label="Principal">
         <ul>
           {navegacion.map((item) => (
@@ -38,29 +40,23 @@ const esActivo = (href) =>
         </ul>
       </nav>
 
-      <div class="pildora__acciones">
-        <a class="boton boton--compacto pildora__cta" href="/contacto/">
-          Agendar una conversación
-        </a>
+      <a class="pildora__cta" href="/contacto/">Agendar una conversación</a>
 
-        <button
-          class="pildora__toggle"
-          type="button"
-          aria-expanded="false"
-          aria-controls="menu-principal"
-          data-toggle
-        >
-          <span class="visualmente-oculto">Abrir menú</span>
-          <span class="hamburguesa" aria-hidden="true"></span>
-        </button>
-      </div>
+      <button
+        class="pildora__toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="menu-principal"
+        data-toggle
+      >
+        <span class="visualmente-oculto">Abrir menú</span>
+        <span class="hamburguesa" aria-hidden="true"></span>
+      </button>
     </div>
   </div>
 </header>
 
 <style>
-  /* La barra flota sobre el contenido con aire arriba, como una semilla
-     prensada sobre el lienzo. No empuja al contenido: lo sobrevuela. */
   .cabecera {
     position: sticky;
     top: 0;
@@ -74,41 +70,52 @@ const esActivo = (href) =>
     max-width: var(--ancho);
     margin-inline: auto;
     padding-inline: var(--gutter);
-  }
-
-  .pildora {
-    position: relative;
     display: flex;
     align-items: center;
-    gap: var(--e24);
-    padding: 0.5rem 0.5rem 0.5rem 1.25rem;
-    border-radius: var(--r-pildora);
+    justify-content: space-between;
+    gap: var(--e16);
+  }
+
+  /* Superficie compartida por las dos piezas flotantes */
+  .marca,
+  .pildora {
     background: rgba(17, 18, 24, 0.9);
     border: 1px solid var(--linea-oscura);
+    border-radius: var(--r-pildora);
     box-shadow: var(--sombra-nav);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
     pointer-events: auto;
   }
 
-  .pildora__marca {
+  .marca {
     display: flex;
     align-items: center;
     flex-shrink: 0;
-    height: var(--alto-logo);
+    height: var(--alto-marca);
+    padding-inline: clamp(1rem, 2vw, 1.5rem);
+    transition: border-color var(--transicion);
   }
-  .pildora__marca img {
-    height: 100%;
+  .marca:hover {
+    border-color: var(--indigo-vivo);
+  }
+  .marca img {
+    height: var(--alto-logo);
     width: auto;
   }
 
-  .pildora__nav {
-    flex: 1;
-  }
-  .pildora__nav ul {
+  .pildora {
+    position: relative;
     display: flex;
     align-items: center;
     gap: var(--e8);
+    padding: var(--e8);
+  }
+
+  .pildora__nav ul {
+    display: flex;
+    align-items: center;
+    gap: 2px;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -116,7 +123,7 @@ const esActivo = (href) =>
 
   .nav-enlace {
     display: block;
-    padding: 0.4375rem 0.75rem;
+    padding: 0.5rem 0.75rem;
     border-radius: var(--r-boton);
     font-size: 0.875rem;
     font-weight: 500;
@@ -135,19 +142,19 @@ const esActivo = (href) =>
     background: var(--indigo-profundo);
   }
 
-  .pildora__acciones {
-    display: flex;
-    align-items: center;
-    gap: var(--e8);
-    flex-shrink: 0;
-  }
-
   .pildora__cta {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 1.125rem;
+    border-radius: var(--r-pildora);
     background: var(--indigo-vivo);
     color: var(--lienzo);
-    border-radius: var(--r-pildora);
-    padding: 0.5rem 1.125rem;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    letter-spacing: -0.003em;
+    text-decoration: none;
     white-space: nowrap;
+    transition: background var(--transicion);
   }
   .pildora__cta:hover {
     background: var(--indigo-claro);
@@ -161,7 +168,7 @@ const esActivo = (href) =>
     height: 2.5rem;
     align-items: center;
     justify-content: center;
-    border: 1px solid var(--linea-oscura);
+    border: 0;
     border-radius: var(--r-chip);
     background: transparent;
     cursor: pointer;
@@ -203,19 +210,24 @@ const esActivo = (href) =>
     transform: translateY(-5px) rotate(-45deg);
   }
 
-  @media (max-width: 66rem) {
+  @media (max-width: 68rem) {
     .pildora__toggle {
       display: flex;
     }
 
-    .pildora {
-      flex-wrap: wrap;
-      justify-content: space-between;
-    }
-
+    /* El menú se despliega como panel propio bajo la píldora */
     .pildora__nav {
-      order: 3;
-      flex-basis: 100%;
+      position: absolute;
+      top: calc(100% + var(--e8));
+      right: 0;
+      min-width: 15rem;
+      padding: var(--e8);
+      border: 1px solid var(--linea-oscura);
+      border-radius: var(--r-tarjeta);
+      background: rgba(17, 18, 24, 0.96);
+      box-shadow: var(--sombra-nav);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
       display: none;
     }
     .pildora__nav[data-abierto] {
@@ -226,27 +238,17 @@ const esActivo = (href) =>
       flex-direction: column;
       align-items: stretch;
       gap: 2px;
-      padding: var(--e8) 0 var(--e8);
-      margin-top: var(--e8);
-      border-top: 1px solid var(--linea-oscura);
     }
 
     .nav-enlace {
       padding: 0.75rem;
       font-size: 0.9375rem;
     }
-
-    .pildora__cta {
-      display: none;
-    }
-    .pildora__nav[data-abierto] ~ .pildora__acciones .pildora__cta {
-      display: inline-flex;
-    }
   }
 
-  @media (max-width: 30rem) {
-    .pildora {
-      padding-left: 1rem;
+  @media (max-width: 40rem) {
+    .pildora__cta {
+      display: none;
     }
   }
 </style>
@@ -257,6 +259,12 @@ const esActivo = (href) =>
   const etiqueta = boton?.querySelector('.visualmente-oculto');
 
   if (boton && menu) {
+    const cerrar = () => {
+      boton.setAttribute('aria-expanded', 'false');
+      menu.removeAttribute('data-abierto');
+      if (etiqueta) etiqueta.textContent = 'Abrir menú';
+    };
+
     boton.addEventListener('click', () => {
       const abierto = boton.getAttribute('aria-expanded') === 'true';
       boton.setAttribute('aria-expanded', String(!abierto));
@@ -266,8 +274,19 @@ const esActivo = (href) =>
 
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && boton.getAttribute('aria-expanded') === 'true') {
-        boton.click();
+        cerrar();
         boton.focus();
+      }
+    });
+
+    // Al ser un panel flotante, un clic fuera debe cerrarlo.
+    document.addEventListener('click', (e) => {
+      if (
+        boton.getAttribute('aria-expanded') === 'true' &&
+        !menu.contains(e.target) &&
+        !boton.contains(e.target)
+      ) {
+        cerrar();
       }
     });
   }

@@ -77,12 +77,13 @@
   --r-chip: 999px;
   --r-campo: 16px;
 
-  /* Altura de la píldora de navegación. El héroe y las cabeceras de
-     página se suben bajo ella con margen negativo, así que este token
-     es la única fuente de verdad: cambiarlo aquí reencaja todo. */
-  --alto-logo: 2.625rem;
-  --alto-pildora: calc(var(--alto-logo) + var(--e8) * 2);
-  --alto-cabecera: calc(var(--alto-pildora) + var(--e16) * 2);
+  /* La marca flota en su propia pieza, separada de la barra de menú, para
+     que su tamaño no dependa de la altura del navegador. --alto-logo es la
+     única fuente de verdad: el héroe, las cabeceras de página y el 404 se
+     suben bajo la cabecera con un margen negativo derivado de aquí. */
+  --alto-logo: 3.5rem;
+  --alto-marca: calc(var(--alto-logo) + var(--e16));
+  --alto-cabecera: calc(var(--alto-marca) + var(--e16) * 2);
 
   /* Layout */
   --ancho: 1200px;
@@ -99,6 +100,12 @@
 /* En pantallas estrechas el logotipo baja, y con él la altura de la
    píldora: el token se redefine para que los márgenes negativos del
    héroe sigan cuadrando. */
+@media (max-width: 48rem) {
+  :root {
+    --alto-logo: 2.75rem;
+  }
+}
+
 @media (max-width: 30rem) {
   :root {
     --alto-logo: 2.25rem;
