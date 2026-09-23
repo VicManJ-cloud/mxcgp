@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import CabeceraPagina from '../components/CabeceraPagina.astro';
 import Cierre from '../components/Cierre.astro';
+import Logotipo from '../components/Logotipo.astro';
 
 const formaDeTrabajar = [
   {
@@ -65,14 +66,7 @@ const formaDeTrabajar = [
               Traducir el análisis en recomendaciones claras, viables y
               orientadas a resultados.
             </p>
-            <img
-              class="cita__marca"
-              src="/logo/mx-vertical.png"
-              alt=""
-              width="347"
-              height="610"
-              loading="lazy"
-            />
+            <Logotipo variante="vertical" class="cita__marca" />
           </blockquote>
         </aside>
       </div>
@@ -149,8 +143,8 @@ const formaDeTrabajar = [
   }
 
   .cita__marca {
-    width: 7.5rem;
-    opacity: 0.75;
-    mix-blend-mode: multiply;
+    height: 8.5rem;
+    color: var(--tinta);
+    opacity: 0.8;
   }
 </style>

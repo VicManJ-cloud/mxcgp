@@ -29,8 +29,10 @@ src/
   components/           Header.astro y Footer.astro.
   pages/                Una página por archivo; la ruta sale del nombre.
   styles/global.css     Tokens de color, tipografía y componentes compartidos.
+  assets/logo/          Logotipos en SVG, insertados en línea.
+  components/Logotipo.astro
 public/
-  logo/                 Los 4 PNG del manual (vertical/horizontal, pos/neg).
+  logo/mx-horizontal.png  Solo para la vista previa social (og:image).
   favicon.svg
 docs/                   Documentos originales: guion y manual de identidad.
 ```

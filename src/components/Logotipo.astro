@@ -1,0 +1,43 @@
+---
+/**
+ * Logotipo en SVG, trazado desde los originales del manual de identidad.
+ *
+ * Se inserta en línea (no como <img>) para que los trazos hereden
+ * `currentColor`: un solo archivo sirve sobre fondo claro y sobre fondo
+ * oscuro, sin necesitar una versión «negativo» aparte. La bajada
+ * «GESTIÓN PÚBLICA» y los filetes van en una capa al 55% de opacidad,
+ * que es la jerarquía tonal del original.
+ *
+ * `titulo` da el nombre accesible. Se omite cuando el elemento que lo
+ * contiene ya aporta uno (un enlace con aria-label, por ejemplo), y
+ * entonces el SVG queda como decorativo.
+ */
+import horizontal from '../assets/logo/mx-horizontal.svg?raw';
+import vertical from '../assets/logo/mx-vertical.svg?raw';
+
+const { variante = 'horizontal', titulo, class: clase } = Astro.props;
+
+const base = variante === 'vertical' ? vertical : horizontal;
+const svg = titulo
+  ? base.replace('<svg ', `<svg role="img" aria-label="${titulo}" `)
+  : base.replace('<svg ', '<svg aria-hidden="true" focusable="false" ');
+---
+
+<span class:list={['logotipo', `logotipo--${variante}`, clase]} set:html={svg} />
+
+<style>
+  .logotipo {
+    display: inline-flex;
+    align-items: center;
+    /* La altura la fija quien lo usa; el ancho se deduce del viewBox. */
+    height: var(--alto-logo);
+    color: currentColor;
+  }
+
+  /* El SVG llega por set:html, así que el estilo tiene que ser global */
+  .logotipo :global(svg) {
+    display: block;
+    height: 100%;
+    width: auto;
+  }
+</style>

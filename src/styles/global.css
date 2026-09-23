@@ -81,9 +81,8 @@
      que su tamaño no dependa de la altura del navegador. --alto-logo es la
      única fuente de verdad: el héroe, las cabeceras de página y el 404 se
      suben bajo la cabecera con un margen negativo derivado de aquí. */
-  --alto-logo: 3.5rem;
-  --alto-marca: calc(var(--alto-logo) + var(--e16));
-  --alto-cabecera: calc(var(--alto-marca) + var(--e16) * 2);
+  --alto-logo: 4.25rem;
+  --alto-cabecera: calc(var(--alto-logo) + var(--e16) * 2);
 
   /* Layout */
   --ancho: 1200px;
@@ -102,13 +101,13 @@
    héroe sigan cuadrando. */
 @media (max-width: 48rem) {
   :root {
-    --alto-logo: 2.75rem;
+    --alto-logo: 3.25rem;
   }
 }
 
 @media (max-width: 30rem) {
   :root {
-    --alto-logo: 2.25rem;
+    --alto-logo: 2.75rem;
   }
 }
 

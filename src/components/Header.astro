@@ -1,26 +1,17 @@
 ---
+import Logotipo from './Logotipo.astro';
 import { navegacion, empresa } from '../data/site.js';
 const actual = Astro.url.pathname;
 const esActivo = (href) =>
   href === '/' ? actual === '/' : actual.startsWith(href);
 ---
 
-<header class="cabecera">
+<header class="cabecera" data-cabecera>
   <div class="cabecera__pista">
-    <!-- La marca vive en su propia pieza flotante, no dentro de la barra de
-         navegación: así su tamaño no queda atado a la altura del menú. -->
-    <a
-      class="marca sobre-oscuro"
-      href="/"
-      aria-label={`${empresa.nombre} — Inicio`}
-    >
-      <img
-        src="/logo/mx-horizontal-negativo.png"
-        alt={empresa.nombre}
-        width="864"
-        height="323"
-        decoding="async"
-      />
+    <!-- El logotipo va suelto sobre el lienzo, sin contenedor propio: así
+         su tamaño no depende de ninguna caja. -->
+    <a class="marca" href="/" aria-label={`${empresa.nombre} — Inicio`}>
+      <Logotipo variante="horizontal" />
     </a>
 
     <div class="pildora sobre-oscuro">
@@ -63,6 +54,17 @@ const esActivo = (href) =>
     z-index: 200;
     padding-block: var(--e16);
     pointer-events: none;
+    transition: background var(--transicion), border-color var(--transicion);
+    border-bottom: 1px solid transparent;
+  }
+
+  /* Al desplazar, la cabecera gana su propio fondo oscuro: el logotipo es
+     blanco y sin esto desaparecería sobre las bandas claras. */
+  .cabecera[data-fijo] {
+    background: rgba(17, 18, 24, 0.88);
+    border-bottom-color: var(--linea-oscura);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
   }
 
   .cabecera__pista {
@@ -76,32 +78,16 @@ const esActivo = (href) =>
     gap: var(--e16);
   }
 
-  /* Superficie compartida por las dos piezas flotantes */
-  .marca,
-  .pildora {
-    background: rgba(17, 18, 24, 0.9);
-    border: 1px solid var(--linea-oscura);
-    border-radius: var(--r-pildora);
-    box-shadow: var(--sombra-nav);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    pointer-events: auto;
-  }
-
   .marca {
     display: flex;
     align-items: center;
     flex-shrink: 0;
-    height: var(--alto-marca);
-    padding-inline: clamp(1rem, 2vw, 1.5rem);
-    transition: border-color var(--transicion);
+    color: var(--blanco);
+    pointer-events: auto;
+    transition: opacity var(--transicion);
   }
   .marca:hover {
-    border-color: var(--indigo-vivo);
-  }
-  .marca img {
-    height: var(--alto-logo);
-    width: auto;
+    opacity: 0.78;
   }
 
   .pildora {
@@ -110,6 +96,23 @@ const esActivo = (href) =>
     align-items: center;
     gap: var(--e8);
     padding: var(--e8);
+    border-radius: var(--r-pildora);
+    background: rgba(17, 18, 24, 0.9);
+    border: 1px solid var(--linea-oscura);
+    box-shadow: var(--sombra-nav);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    pointer-events: auto;
+    transition: background var(--transicion), border-color var(--transicion),
+      box-shadow var(--transicion);
+  }
+
+  /* Con la barra ya opaca, la píldora sobra como caja: se disuelve para
+     no leerse como una caja dentro de otra. */
+  .cabecera[data-fijo] .pildora {
+    background: transparent;
+    border-color: transparent;
+    box-shadow: none;
   }
 
   .pildora__nav ul {
@@ -215,7 +218,6 @@ const esActivo = (href) =>
       display: flex;
     }
 
-    /* El menú se despliega como panel propio bajo la píldora */
     .pildora__nav {
       position: absolute;
       top: calc(100% + var(--e8));
@@ -254,9 +256,19 @@ const esActivo = (href) =>
 </style>
 
 <script>
+  const cabecera = document.querySelector('[data-cabecera]');
   const boton = document.querySelector('[data-toggle]');
   const menu = document.getElementById('menu-principal');
   const etiqueta = boton?.querySelector('.visualmente-oculto');
+
+  // Fondo opaco en cuanto el contenido empieza a pasar por debajo.
+  if (cabecera) {
+    const marcarFijo = () => {
+      cabecera.toggleAttribute('data-fijo', window.scrollY > 24);
+    };
+    marcarFijo();
+    window.addEventListener('scroll', marcarFijo, { passive: true });
+  }
 
   if (boton && menu) {
     const cerrar = () => {

@@ -1,5 +1,6 @@
 ---
 import MarcaFondo from './MarcaFondo.astro';
+import Logotipo from './Logotipo.astro';
 import { navegacion, empresa } from '../data/site.js';
 const anio = new Date().getFullYear();
 ---
@@ -9,14 +10,7 @@ const anio = new Date().getFullYear();
   <div class="contenedor banda__interior">
     <div class="pie__principal">
       <div class="pie__marca">
-        <img
-          src="/logo/mx-horizontal-negativo.png"
-          alt={empresa.nombre}
-          width="864"
-          height="323"
-          loading="lazy"
-          decoding="async"
-        />
+        <Logotipo variante="horizontal" titulo={empresa.nombre} />
         <p class="pie__descripcion">
           Fortalecemos la gestión pública de los gobiernos estatales y
           municipales mediante soluciones técnicas y financieras.
@@ -68,9 +62,9 @@ const anio = new Date().getFullYear();
     }
   }
 
-  .pie__marca img {
-    height: 3.5rem;
-    width: auto;
+  .pie__marca :global(.logotipo) {
+    height: 3.75rem;
+    color: var(--blanco);
     margin-bottom: var(--e24);
   }
 
