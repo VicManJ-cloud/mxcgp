@@ -1,7 +1,35 @@
+# ---------------------------------------------------------------------------
+# En git va únicamente lo necesario para construir y publicar el sitio, que
+# vive completo en sitio/. Todo lo demás se queda en esta computadora.
+# ---------------------------------------------------------------------------
+
+# Material de trabajo: originales del cliente, capturas y notas internas.
+# No hace falta para que el sitio funcione y contiene documentos del cliente.
+recursos/
+
+# Dependencias y artefactos de compilación: se regeneran con
+# `npm install` y `npm run build` a partir de lo que sí está versionado.
 node_modules/
-dist/
-.astro/
-.DS_Store
-*.log
+sitio/dist/
+sitio/.astro/
+
+# Variables de entorno: pueden contener credenciales.
 .env
-.env.production
+.env.*
+!.env.example
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editores
+.vscode/
+.idea/
+*.swp
+*~
+
+# Registros
+*.log
+npm-debug.log*
+yarn-error.log*

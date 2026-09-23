@@ -1,8 +1,26 @@
 # MX Consultores en Gestión Pública — sitio web
 
 Sitio institucional estático construido con [Astro](https://astro.build). El
-contenido proviene del guion aprobado y la identidad visual del manual de marca;
-ambos documentos originales están en `docs/`.
+contenido proviene de un guion aprobado y la identidad visual de un manual de
+marca.
+
+## El repositorio está partido en dos
+
+```
+mxce/
+  sitio/       ← esto. Todo lo necesario para construir y publicar. Va en git.
+  recursos/    ← material de trabajo. NO va en git, solo existe en la máquina.
+```
+
+`recursos/` guarda los documentos originales del cliente (el guion y el manual
+de identidad en `.docx`), las capturas de revisión y `PENDIENTES.md` con lo que
+falta resolver antes de publicar. Nada de eso hace falta para que el sitio
+funcione, y son documentos del cliente, así que quedan fuera del control de
+versiones.
+
+**Consecuencia:** quien clone el repositorio obtiene un sitio que compila y
+funciona, pero no ve esas notas. Si `recursos/` se borra de esta computadora,
+no hay copia en git — conviene respaldarlo aparte.
 
 ## Requisitos
 
@@ -10,7 +28,10 @@ ambos documentos originales están en `docs/`.
 
 ## Comandos
 
+Todos se ejecutan **desde `sitio/`**, no desde la raíz del repositorio.
+
 ```bash
+cd sitio
 npm install      # instala dependencias (una sola vez)
 npm run dev      # servidor local en http://localhost:4321 con recarga automática
 npm run build    # genera el sitio final en dist/
@@ -23,18 +44,18 @@ lo que se sube al hosting**: Astro y Node no se necesitan en el servidor.
 ## Estructura
 
 ```
-src/
-  data/site.js          Fuente única de datos: menú, los 6 servicios, correo.
-  layouts/Base.astro    <head>, metadatos, SEO, cabecera y pie comunes.
-  components/           Header.astro y Footer.astro.
-  pages/                Una página por archivo; la ruta sale del nombre.
-  styles/global.css     Tokens de color, tipografía y componentes compartidos.
-  assets/logo/          Logotipos en SVG, insertados en línea.
-  components/Logotipo.astro
-public/
-  logo/mx-horizontal.png  Solo para la vista previa social (og:image).
-  favicon.svg
-docs/                   Documentos originales: guion y manual de identidad.
+sitio/
+  src/
+    data/site.js         Fuente única de datos: menú, los 6 servicios, correo.
+    layouts/Base.astro   <head>, metadatos, SEO, cabecera y pie comunes.
+    components/          Header, Footer, Logotipo, Orbe, Glifo, Entregables…
+    pages/               Una página por archivo; la ruta sale del nombre.
+    styles/global.css    Tokens de color, tipografía y componentes compartidos.
+    assets/logo/         Logotipos en SVG, insertados en línea.
+  public/
+    logo/mx-horizontal.png   Solo para la vista previa social (og:image).
+    favicon.svg
+  astro.config.mjs       Dominio del sitio y opciones de compilación.
 ```
 
 ### Dónde editar qué
@@ -68,7 +89,7 @@ derivada del propio logotipo.
 | Secundario | `--ambar` | `#e0a63c` | **Solo sobre oscuro.** Sobre claro usa `--ambar-oscuro` |
 
 El índigo no es arbitrario: se muestreó del logotipo en
-`docs/WhatsApp Image…jpeg`, que resultó ser un índigo desaturado en H 240°
+`../recursos/docs/WhatsApp Image…jpeg`, que resultó ser un índigo desaturado en H 240°
 (≈ `#50506F`). La paleta de acento se construyó saturando y ajustando ese
 tono hasta alcanzar contraste AA o superior en cada par en uso.
 
@@ -116,4 +137,5 @@ puede conectar a Formspree o Web3Forms cambiando el manejador `submit` en
 `dist/` es estático puro y funciona en cualquier hosting: Netlify, Vercel,
 Cloudflare Pages, GitHub Pages o un servidor propio.
 
-Antes de publicar, revisar `PENDIENTES.md`.
+Antes de publicar, revisar `../recursos/PENDIENTES.md`. Hay dos asuntos
+bloqueantes que no se resuelven desde el código.
