@@ -3,11 +3,19 @@ import Base from '../layouts/Base.astro';
 import CabeceraPagina from '../components/CabeceraPagina.astro';
 import { empresa } from '../data/site.js';
 
-// BORRADOR. Este texto es una estructura base conforme a la LFPDPPP, no un
-// documento legal validado. Antes de publicar el sitio:
-//   1. Completar los datos entre corchetes (domicilio, responsable).
-//   2. Someterlo a revisión de un abogado.
-//   3. Eliminar el bloque <aside class="borrador"> de esta página.
+// BORRADOR SIN PUBLICAR.
+//
+// El guion bajo del nombre de archivo hace que Astro NO genere ruta para
+// esta página: el trabajo se conserva, pero no sale al sitio.
+//
+// Se retiró porque el sitio dejó de recabar datos personales al quitar el
+// formulario de contacto. Si alguna vez se reinstala un formulario, este
+// aviso vuelve a ser obligatorio y habrá que:
+//   1. Quitar el guion bajo del nombre de archivo.
+//   2. Completar los datos entre corchetes (domicilio, fecha).
+//   3. Someterlo a revisión de un abogado.
+//   4. Eliminar el bloque <aside class="borrador">.
+//   5. Devolver el enlace en el pie de página.
 ---
 
 <Base

@@ -39,7 +39,9 @@ const anio = new Date().getFullYear();
 
     <div class="pie__legal">
       <p>© {anio} {empresa.nombre}. Todos los derechos reservados.</p>
-      <p><a href="/aviso-privacidad/">Aviso de privacidad</a></p>
+      <p>
+        <a href={`mailto:${empresa.correo}`}>{empresa.correo}</a>
+      </p>
     </div>
   </div>
 </footer>

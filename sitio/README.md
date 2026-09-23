@@ -122,20 +122,31 @@ Tres, todas deliberadas y autorizadas por el cliente:
 El logotipo, en cambio, se respeta sin cambios en las cuatro variantes del
 manual.
 
-## Formulario de contacto
+## Contacto: por qué no hay formulario
 
-El formulario **no envía correos por sí mismo**: valida los campos y abre el
-programa de correo del visitante con el mensaje ya redactado hacia
-`inverproyecto30@gmail.com`.
+La página de Contacto ofrece el correo y un botón que abre el programa de
+correo del visitante con el asunto y una plantilla ya redactadas.
 
-Si más adelante se quiere que envíe directo sin abrir el cliente de correo, se
-puede conectar a Formspree o Web3Forms cambiando el manejador `submit` en
-`src/pages/contacto.astro` por un `fetch` al endpoint del servicio.
+Es una decisión deliberada, no una carencia. Un formulario convierte al sitio
+en punto de recolección de datos personales, y eso obliga a publicar un aviso
+de privacidad validado por un abogado conforme a la LFPDPPP. Sin formulario,
+el sitio **no recibe, no almacena y no transmite nada**: la plantilla se
+construye al compilar y viaja dentro del propio enlace `mailto:`.
+
+Para no perder la información que el formulario recogía, la página explica
+qué conviene incluir en el primer correo (institución, cargo, servicio de
+interés y el reto concreto), y la plantilla ya trae esos campos.
+
+**Si alguna vez se reinstala un formulario**, el aviso de privacidad vuelve a
+ser obligatorio. El borrador está conservado en
+`src/pages/_aviso-privacidad.astro` —el guion bajo impide que Astro le genere
+ruta— con los pasos anotados en su cabecera.
 
 ## Publicación
 
 `dist/` es estático puro y funciona en cualquier hosting: Netlify, Vercel,
 Cloudflare Pages, GitHub Pages o un servidor propio.
 
-Antes de publicar, revisar `../recursos/PENDIENTES.md`. Hay dos asuntos
-bloqueantes que no se resuelven desde el código.
+Antes de publicar, revisar `../recursos/PENDIENTES.md`. Queda un asunto
+bloqueante que no se resuelve desde el código: validar las afirmaciones de la
+sección Nosotros.
