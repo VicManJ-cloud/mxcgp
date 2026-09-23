@@ -44,31 +44,31 @@ const idGrano = `grano-${Math.random().toString(36).slice(2, 9)}`;
 
   .orbe--indigo {
     background: radial-gradient(
-      circle at 34% 30%,
-      rgba(124, 134, 240, 0.55) 0%,
-      rgba(63, 71, 149, 0.34) 36%,
-      rgba(17, 18, 24, 0) 70%
+      circle at 38% 34%,
+      rgba(124, 134, 240, 0.26) 0%,
+      rgba(63, 71, 149, 0.14) 34%,
+      rgba(17, 18, 24, 0) 66%
     );
   }
 
   .orbe--ambar {
     background: radial-gradient(
-      circle at 34% 30%,
-      rgba(224, 166, 60, 0.28) 0%,
-      rgba(122, 90, 22, 0.2) 38%,
-      rgba(17, 18, 24, 0) 70%
+      circle at 38% 34%,
+      rgba(224, 166, 60, 0.13) 0%,
+      rgba(122, 90, 22, 0.08) 36%,
+      rgba(17, 18, 24, 0) 66%
     );
   }
 
   .orbe--derecha {
     top: 50%;
-    right: clamp(-14rem, -12vw, -6rem);
+    right: clamp(-18rem, -16vw, -9rem);
     translate: 0 -50%;
   }
 
   .orbe--izquierda {
     top: 42%;
-    left: clamp(-16rem, -14vw, -8rem);
+    left: clamp(-20rem, -18vw, -11rem);
     translate: 0 -50%;
   }
 
@@ -78,15 +78,29 @@ const idGrano = `grano-${Math.random().toString(36).slice(2, 9)}`;
     translate: -50% 0;
   }
 
-  /* Grano: rompe el degradado para que no se vea como un gradiente plano */
+  /* Grano: rompe el degradado para que no se lea como un gradiente plano.
+     Lleva la misma máscara radial que el orbe; sin ella pintaba un disco
+     opaco de borde duro sobre todo el círculo. */
   .orbe__grano {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
     border-radius: inherit;
-    opacity: 0.16;
+    opacity: 0.07;
     mix-blend-mode: overlay;
+    -webkit-mask-image: radial-gradient(
+      circle at 38% 34%,
+      #000 0%,
+      rgba(0, 0, 0, 0.35) 38%,
+      transparent 66%
+    );
+    mask-image: radial-gradient(
+      circle at 38% 34%,
+      #000 0%,
+      rgba(0, 0, 0, 0.35) 38%,
+      transparent 66%
+    );
   }
 
   @media (max-width: 47.99rem) {
