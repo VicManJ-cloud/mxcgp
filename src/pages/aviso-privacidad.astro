@@ -1,0 +1,170 @@
+---
+import Base from '../layouts/Base.astro';
+import CabeceraPagina from '../components/CabeceraPagina.astro';
+import { empresa } from '../data/site.js';
+
+// BORRADOR. Este texto es una estructura base conforme a la LFPDPPP, no un
+// documento legal validado. Antes de publicar el sitio:
+//   1. Completar los datos entre corchetes (domicilio, responsable).
+//   2. Someterlo a revisión de un abogado.
+//   3. Eliminar el bloque <aside class="borrador"> de esta página.
+---
+
+<Base
+  titulo="Aviso de privacidad"
+  descripcion="Aviso de privacidad de MX Consultores en Gestión Pública conforme a la Ley Federal de Protección de Datos Personales en Posesión de los Particulares."
+>
+  <CabeceraPagina
+    etiqueta="Legal"
+    titulo="Aviso de privacidad"
+    entrada="En cumplimiento de la Ley Federal de Protección de Datos Personales en Posesión de los Particulares."
+  />
+
+  <section class="seccion">
+    <div class="contenedor">
+      <aside class="borrador">
+        <strong>Documento en borrador.</strong> Este aviso es una estructura
+        base pendiente de revisión legal y de completar los datos del
+        responsable. No publicar el sitio sin validarlo.
+      </aside>
+
+      <article class="legal">
+        <h2>1. Responsable del tratamiento</h2>
+        <p>
+          {empresa.nombre}, con domicilio en [DOMICILIO FISCAL COMPLETO], es
+          responsable del tratamiento y protección de los datos personales que
+          nos proporciones a través de este sitio.
+        </p>
+
+        <h2>2. Datos personales que recabamos</h2>
+        <p>
+          A través del formulario de contacto recabamos: nombre, institución,
+          cargo, correo electrónico, servicio de interés y el contenido del
+          mensaje que decidas enviarnos. No recabamos datos personales
+          sensibles ni datos patrimoniales o financieros de carácter personal.
+        </p>
+
+        <h2>3. Finalidades del tratamiento</h2>
+        <p>Los datos que nos proporciones serán utilizados para:</p>
+        <ul>
+          <li>Atender y dar seguimiento a tu solicitud de contacto.</li>
+          <li>
+            Elaborar y enviar propuestas de servicios de consultoría, cuando
+            así lo solicites.
+          </li>
+          <li>
+            Mantener comunicación sobre el alcance de una posible colaboración.
+          </li>
+        </ul>
+
+        <h2>4. Transferencia de datos</h2>
+        <p>
+          No transferimos tus datos personales a terceros sin tu consentimiento,
+          salvo en los supuestos previstos por el artículo 37 de la Ley Federal
+          de Protección de Datos Personales en Posesión de los Particulares.
+        </p>
+
+        <h2>5. Derechos ARCO</h2>
+        <p>
+          Tienes derecho a conocer qué datos personales tenemos sobre ti, para
+          qué los utilizamos y las condiciones de su uso (Acceso); solicitar la
+          corrección de tu información cuando sea inexacta o incompleta
+          (Rectificación); pedir que eliminemos tu información de nuestros
+          registros cuando consideres que no está siendo utilizada conforme a
+          los principios y deberes que marca la normativa (Cancelación); así
+          como oponerte al uso de tus datos personales para fines específicos
+          (Oposición).
+        </p>
+        <p>
+          Para ejercer cualquiera de estos derechos, envía tu solicitud al
+          correo
+          <a href={`mailto:${empresa.correo}`}>{empresa.correo}</a>, indicando
+          tu nombre completo, el derecho que deseas ejercer y un medio de
+          contacto para comunicarte la respuesta.
+        </p>
+
+        <h2>6. Revocación del consentimiento</h2>
+        <p>
+          Puedes revocar en cualquier momento el consentimiento que nos hayas
+          otorgado para el tratamiento de tus datos personales, mediante
+          solicitud al mismo correo electrónico señalado en el apartado
+          anterior.
+        </p>
+
+        <h2>7. Uso de cookies</h2>
+        <p>
+          Este sitio no utiliza cookies de seguimiento, herramientas de
+          analítica ni tecnologías de rastreo publicitario.
+        </p>
+
+        <h2>8. Cambios al aviso de privacidad</h2>
+        <p>
+          Cualquier modificación a este aviso será publicada en esta misma
+          página. Te recomendamos revisarla periódicamente.
+        </p>
+
+        <p class="legal__fecha">
+          Última actualización: [FECHA DE PUBLICACIÓN].
+        </p>
+      </article>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .borrador {
+    max-width: 68ch;
+    margin-bottom: clamp(2.5rem, 5vw, 3.5rem);
+    padding: 1.25rem 1.5rem;
+    border: 1px solid var(--negro);
+    font-size: 0.9375rem;
+    line-height: 1.65;
+    color: var(--tinta-secundaria);
+  }
+  .borrador strong {
+    color: var(--negro);
+  }
+
+  .legal {
+    max-width: 68ch;
+  }
+
+  .legal h2 {
+    margin-top: clamp(2.25rem, 4vw, 3rem);
+    margin-bottom: 0.875rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--linea);
+    font-size: 1.0625rem;
+    letter-spacing: -0.01em;
+  }
+  .legal h2:first-child {
+    margin-top: 0;
+  }
+
+  .legal p,
+  .legal ul {
+    color: var(--tinta-secundaria);
+  }
+  .legal p + p,
+  .legal ul {
+    margin-top: 1rem;
+  }
+
+  .legal ul {
+    padding-left: 1.25rem;
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .legal a {
+    color: var(--negro);
+  }
+
+  .legal__fecha {
+    margin-top: clamp(2.5rem, 5vw, 3.5rem);
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--linea);
+    font-size: 0.8125rem;
+    color: var(--tinta-meta);
+  }
+</style>

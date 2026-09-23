@@ -1,0 +1,197 @@
+---
+import { navegacion, empresa } from '../data/site.js';
+const actual = Astro.url.pathname;
+const esActivo = (href) =>
+  href === '/' ? actual === '/' : actual.startsWith(href);
+---
+
+<header class="cabecera" data-cabecera>
+  <div class="contenedor cabecera__interior">
+    <a class="cabecera__marca" href="/" aria-label={`${empresa.nombre} — Inicio`}>
+      <img
+        src="/logo/mx-horizontal.png"
+        alt={empresa.nombre}
+        width="1400"
+        height="490"
+        decoding="async"
+      />
+    </a>
+
+    <button
+      class="cabecera__toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="menu-principal"
+      data-toggle
+    >
+      <span class="visualmente-oculto">Abrir menú</span>
+      <span class="hamburguesa" aria-hidden="true"></span>
+    </button>
+
+    <nav class="cabecera__nav" id="menu-principal" aria-label="Principal">
+      <ul>
+        {navegacion.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              class:list={['cabecera__enlace', { 'es-activo': esActivo(item.href) }]}
+              aria-current={esActivo(item.href) ? 'page' : undefined}
+            >
+              {item.texto}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .cabecera {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--blanco);
+    border-bottom: 1px solid var(--linea);
+  }
+
+  .cabecera__interior {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    min-height: 5rem;
+  }
+
+  .cabecera__marca {
+    display: block;
+    flex-shrink: 0;
+  }
+  .cabecera__marca img {
+    height: clamp(2rem, 4vw, 2.5rem);
+    width: auto;
+  }
+
+  .cabecera__nav ul {
+    display: flex;
+    align-items: center;
+    gap: clamp(1.25rem, 2.5vw, 2.25rem);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .cabecera__enlace {
+    position: relative;
+    display: block;
+    padding-block: 0.4rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--tinta-secundaria);
+    transition: color var(--transicion);
+  }
+  .cabecera__enlace::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 1px;
+    width: 100%;
+    background: var(--negro);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--transicion);
+  }
+  .cabecera__enlace:hover { color: var(--negro); }
+  .cabecera__enlace:hover::after { transform: scaleX(1); }
+  .cabecera__enlace.es-activo { color: var(--negro); }
+  .cabecera__enlace.es-activo::after { transform: scaleX(1); }
+
+  /* Disparador móvil */
+  .cabecera__toggle {
+    display: none;
+    width: 2.75rem;
+    height: 2.75rem;
+    margin-right: -0.625rem;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: 0;
+    cursor: pointer;
+  }
+
+  .hamburguesa,
+  .hamburguesa::before,
+  .hamburguesa::after {
+    display: block;
+    width: 1.375rem;
+    height: 1px;
+    background: var(--negro);
+    transition: transform var(--transicion), opacity var(--transicion);
+  }
+  .hamburguesa { position: relative; }
+  .hamburguesa::before,
+  .hamburguesa::after {
+    content: '';
+    position: absolute;
+    left: 0;
+  }
+  .hamburguesa::before { top: -6px; }
+  .hamburguesa::after { top: 6px; }
+
+  [aria-expanded='true'] .hamburguesa { background: transparent; }
+  [aria-expanded='true'] .hamburguesa::before { transform: translateY(6px) rotate(45deg); }
+  [aria-expanded='true'] .hamburguesa::after { transform: translateY(-6px) rotate(-45deg); }
+
+  @media (max-width: 61.99rem) {
+    .cabecera__toggle { display: flex; }
+
+    .cabecera__nav {
+      position: absolute;
+      inset: 100% 0 auto 0;
+      background: var(--blanco);
+      border-bottom: 1px solid var(--linea);
+      display: none;
+    }
+    .cabecera__nav[data-abierto] { display: block; }
+
+    .cabecera__nav ul {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+      padding: 0.5rem var(--gutter) 1.5rem;
+    }
+    .cabecera__enlace {
+      padding-block: 1rem;
+      border-bottom: 1px solid var(--linea);
+    }
+    .cabecera__enlace::after { display: none; }
+    .cabecera__nav li:last-child .cabecera__enlace { border-bottom: 0; }
+  }
+</style>
+
+<script>
+  const boton = document.querySelector('[data-toggle]');
+  const menu = document.getElementById('menu-principal');
+
+  if (boton && menu) {
+    boton.addEventListener('click', () => {
+      const abierto = boton.getAttribute('aria-expanded') === 'true';
+      boton.setAttribute('aria-expanded', String(!abierto));
+      menu.toggleAttribute('data-abierto', !abierto);
+      boton.querySelector('.visualmente-oculto').textContent = abierto
+        ? 'Abrir menú'
+        : 'Cerrar menú';
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && boton.getAttribute('aria-expanded') === 'true') {
+        boton.click();
+        boton.focus();
+      }
+    });
+  }
+</script>

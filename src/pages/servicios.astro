@@ -1,0 +1,57 @@
+---
+import Base from '../layouts/Base.astro';
+import CabeceraPagina from '../components/CabeceraPagina.astro';
+import Cierre from '../components/Cierre.astro';
+import Glifo from '../components/Glifo.astro';
+import { servicios } from '../data/site.js';
+---
+
+<Base
+  titulo="Servicios de consultoría"
+  descripcion="Capacitación en evaluación socioeconómica, análisis financiero y finanzas públicas, diagnóstico institucional, planes de mejora, fortalecimiento del impuesto predial y asesoría especializada."
+>
+  <CabeceraPagina
+    etiqueta="02 — Servicios de consultoría"
+    titulo="Servicios modulares, contratables por separado o integrados en un programa"
+    entrada="Seis líneas de trabajo para fortalecer las capacidades técnicas, la gestión financiera y los procesos de las instituciones públicas."
+  />
+
+  <section class="seccion seccion--superficie">
+    <div class="contenedor">
+      <div class="rejilla rejilla--2 rejilla--separada">
+        {servicios.map((s, i) => (
+          <article class="tarjeta tarjeta--servicio revelar" id={s.id}>
+            <div class="tarjeta__cabecera">
+              <span class="tarjeta__numero">
+                {String(i + 1).padStart(2, '0')}
+              </span>
+              <Glifo nombre={s.glifo} />
+            </div>
+            <h2>{s.titulo}</h2>
+            <p>{s.resumen}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Cierre
+    etiqueta="Siguiente paso"
+    titulo="Cuéntanos el reto de tu institución y diseñemos una propuesta de trabajo."
+    boton="Escríbenos"
+  />
+</Base>
+
+<style>
+  /* Compensa la cabecera fija al llegar por ancla desde el inicio */
+  .tarjeta--servicio {
+    scroll-margin-top: 6.5rem;
+  }
+  .tarjeta--servicio:target {
+    border-color: var(--negro);
+    box-shadow: inset 0 3px 0 var(--negro);
+  }
+  .tarjeta--servicio h2 {
+    font-size: clamp(1.125rem, 1.7vw, 1.3125rem);
+  }
+</style>

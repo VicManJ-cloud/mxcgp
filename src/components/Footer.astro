@@ -1,0 +1,130 @@
+---
+import { navegacion, empresa } from '../data/site.js';
+const anio = new Date().getFullYear();
+---
+
+<footer class="pie">
+  <div class="contenedor">
+    <div class="pie__principal">
+      <div class="pie__marca">
+        <img
+          src="/logo/mx-horizontal-negativo.png"
+          alt={empresa.nombre}
+          width="1400"
+          height="490"
+          loading="lazy"
+          decoding="async"
+        />
+        <p class="pie__descripcion">
+          Fortalecemos la gestión pública de los gobiernos estatales y
+          municipales mediante soluciones técnicas y financieras.
+        </p>
+      </div>
+
+      <nav class="pie__nav" aria-label="Pie de página">
+        <h2 class="etiqueta">Navegación</h2>
+        <ul>
+          {navegacion.map((item) => (
+            <li><a href={item.href}>{item.texto}</a></li>
+          ))}
+        </ul>
+      </nav>
+
+      <div class="pie__contacto">
+        <h2 class="etiqueta">Contacto</h2>
+        <p>
+          <a href={`mailto:${empresa.correo}`}>{empresa.correo}</a>
+        </p>
+        <p class="pie__nota">
+          Atendemos gobiernos municipales, estatales y organismos públicos en
+          todo México.
+        </p>
+      </div>
+    </div>
+
+    <div class="pie__legal">
+      <p>© {anio} {empresa.nombre}. Todos los derechos reservados.</p>
+      <p><a href="/aviso-privacidad/">Aviso de privacidad</a></p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .pie {
+    background: var(--negro);
+    color: var(--gris-claro);
+    padding-block: clamp(3.5rem, 7vw, 5.5rem) 2rem;
+  }
+
+  .pie__principal {
+    display: grid;
+    gap: 3rem;
+    padding-bottom: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  @media (min-width: 48rem) {
+    .pie__principal {
+      grid-template-columns: 1.6fr 1fr 1.1fr;
+      gap: clamp(2rem, 5vw, 4.5rem);
+    }
+  }
+
+  .pie__marca img {
+    height: 2.75rem;
+    width: auto;
+    margin-bottom: 1.75rem;
+  }
+
+  .pie__descripcion {
+    max-width: 34ch;
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    color: var(--gris-texto);
+  }
+
+  .pie h2 { margin-bottom: 1.25rem; }
+
+  .pie ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.6rem;
+  }
+
+  .pie a {
+    color: var(--gris-claro);
+    text-decoration: none;
+    font-size: 0.9375rem;
+    border-bottom: 1px solid transparent;
+    transition: border-color var(--transicion), color var(--transicion);
+  }
+  .pie a:hover {
+    color: var(--blanco);
+    border-bottom-color: var(--gris-texto);
+  }
+
+  .pie__contacto p + p { margin-top: 1rem; }
+  .pie__nota {
+    font-size: 0.875rem;
+    line-height: 1.65;
+    color: var(--gris-texto);
+    max-width: 30ch;
+  }
+
+  .pie__legal {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.75rem 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid #3a3a3a;
+    font-size: 0.8125rem;
+    color: var(--gris-texto);
+  }
+  .pie__legal a { font-size: inherit; }
+
+  .pie :focus-visible {
+    outline-color: var(--blanco);
+  }
+</style>

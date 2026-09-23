@@ -1,0 +1,122 @@
+---
+import Base from '../layouts/Base.astro';
+import CabeceraPagina from '../components/CabeceraPagina.astro';
+import Cierre from '../components/Cierre.astro';
+
+const formaDeTrabajar = [
+  {
+    titulo: 'Escuchamos y diagnosticamos',
+    texto:
+      'Entendemos el contexto, las restricciones y las prioridades reales de la institución.',
+  },
+  {
+    titulo: 'Analizamos información y alternativas',
+    texto:
+      'Aplicamos metodologías reconocidas para contrastar opciones con evidencia.',
+  },
+  {
+    titulo: 'Capacitamos y transferimos conocimiento',
+    texto:
+      'Dejamos capacidad instalada en los equipos, no solo un documento entregado.',
+  },
+  {
+    titulo: 'Entregamos propuestas prácticas',
+    texto:
+      'Recomendaciones aplicables y herramientas para dar seguimiento a los resultados.',
+  },
+];
+---
+
+<Base
+  titulo="Nosotros"
+  descripcion="Especialistas en capacitación, evaluación de proyectos y finanzas públicas con experiencia directa en dependencias públicas, instituciones financieras y gobiernos estatales."
+>
+  <CabeceraPagina
+    etiqueta="04 — Nosotros"
+    titulo="Experiencia al servicio de las instituciones"
+  />
+
+  <section class="seccion">
+    <div class="contenedor">
+      <div class="perfil">
+        <div class="perfil__texto flujo">
+          <p class="entradilla">
+            MX Consultores en Gestión Pública está integrado por especialistas
+            en capacitación, evaluación de proyectos y finanzas públicas que han
+            laborado en diversas dependencias públicas y financieras y gobiernos
+            estatales.
+          </p>
+          <p class="texto-secundario">
+            Esta trayectoria reúne conocimientos técnicos y experiencia directa
+            en el funcionamiento de la administración pública. Nuestro enfoque
+            consiste en comprender las necesidades de cada institución y
+            traducir el análisis en recomendaciones claras, viables y orientadas
+            a resultados.
+          </p>
+        </div>
+
+        <!-- Panel de marca. Aquí puede entrar una fotografía del equipo
+             cuando exista: sustituir el contenido por <img>. -->
+        <aside class="perfil__marca" aria-hidden="true">
+          <img src="/logo/mx-vertical.png" alt="" width="800" height="800" />
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion seccion--superficie">
+    <div class="contenedor">
+      <div class="encabezado">
+        <div>
+          <span class="etiqueta">Nuestra forma de trabajar</span>
+        </div>
+        <div class="flujo">
+          <h2 class="titulo-seccion">
+            Del diagnóstico a la capacidad instalada.
+          </h2>
+        </div>
+      </div>
+
+      <div class="rejilla rejilla--4 rejilla--pegada">
+        {formaDeTrabajar.map((p, i) => (
+          <article class="tarjeta revelar">
+            <span class="tarjeta__numero">
+              {String(i + 1).padStart(2, '0')}
+            </span>
+            <h3>{p.titulo}</h3>
+            <p>{p.texto}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Cierre titulo="Conversemos sobre los retos de tu gobierno." boton="Contactar" />
+</Base>
+
+<style>
+  .perfil {
+    display: grid;
+    gap: clamp(2rem, 4vw, 3.5rem);
+    align-items: center;
+  }
+
+  @media (min-width: 62rem) {
+    .perfil {
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    }
+  }
+
+  .perfil__marca {
+    display: grid;
+    place-items: center;
+    padding: clamp(2rem, 5vw, 3.5rem);
+    background: var(--superficie);
+    border: 1px solid var(--linea);
+  }
+
+  .perfil__marca img {
+    width: min(100%, 18rem);
+    mix-blend-mode: multiply;
+  }
+</style>

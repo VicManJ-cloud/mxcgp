@@ -1,0 +1,158 @@
+---
+import Base from '../layouts/Base.astro';
+import CabeceraPagina from '../components/CabeceraPagina.astro';
+import Cierre from '../components/Cierre.astro';
+
+const destinatarios = [
+  {
+    titulo: 'Gobiernos municipales',
+    texto:
+      'Tesorerías, áreas de planeación, obras públicas y unidades de planeación y evaluación.',
+  },
+  {
+    titulo: 'Gobiernos estatales',
+    texto:
+      'Secretarías de finanzas, planeación, infraestructura y dependencias ejecutoras de proyectos.',
+  },
+  {
+    titulo: 'Organismos públicos y entidades descentralizadas',
+    texto:
+      'Equipos responsables de inversión, administración y mejora de procesos.',
+  },
+];
+
+const colaboracion = [
+  {
+    titulo: 'Diagnóstico de necesidades',
+    texto: 'Partimos de la situación real de la institución y sus prioridades.',
+  },
+  {
+    titulo: 'Objetivos y entregables',
+    texto: 'Definimos con precisión el alcance y los productos del trabajo.',
+  },
+  {
+    titulo: 'Análisis o capacitación',
+    texto:
+      'Desarrollamos el estudio técnico o el programa de formación acordado.',
+  },
+  {
+    titulo: 'Mecanismos de seguimiento',
+    texto:
+      'Proponemos indicadores y rutas para dar continuidad a los resultados.',
+  },
+];
+---
+
+<Base
+  titulo="Clientes"
+  descripcion="Trabajamos con gobiernos municipales y estatales, organismos públicos y entidades descentralizadas que buscan fortalecer sus capacidades técnicas y su gestión financiera."
+>
+  <CabeceraPagina
+    etiqueta="03 — Clientes"
+    titulo="A quiénes dirigimos nuestros servicios"
+    entrada="Trabajamos con instituciones públicas que buscan fortalecer sus capacidades técnicas, mejorar su gestión financiera y tomar decisiones de inversión con mayor información."
+  />
+
+  <section class="seccion">
+    <div class="contenedor">
+      <div class="rejilla rejilla--3 rejilla--pegada">
+        {destinatarios.map((d, i) => (
+          <article class="tarjeta revelar">
+            <span class="tarjeta__numero">
+              {String(i + 1).padStart(2, '0')}
+            </span>
+            <h2>{d.titulo}</h2>
+            <p>{d.texto}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion seccion--superficie">
+    <div class="contenedor">
+      <div class="encabezado">
+        <div>
+          <span class="etiqueta">Forma de colaboración</span>
+        </div>
+        <div class="flujo">
+          <h2 class="titulo-seccion">
+            Un proceso ordenado, del diagnóstico al seguimiento.
+          </h2>
+        </div>
+      </div>
+
+      <ol class="ruta">
+        {colaboracion.map((c, i) => (
+          <li class="ruta__paso revelar">
+            <span class="ruta__numero">{String(i + 1).padStart(2, '0')}</span>
+            <h3>{c.titulo}</h3>
+            <p>{c.texto}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <Cierre
+    titulo="¿Tu institución enfrenta un reto de gestión o de finanzas públicas?"
+    boton="Conversemos"
+  />
+</Base>
+
+<style>
+  /* Ruta de colaboración: pasos unidos por una línea continua */
+  .ruta {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: clamp(1.75rem, 3vw, 2.25rem);
+  }
+
+  @media (min-width: 48rem) {
+    .ruta {
+      grid-template-columns: repeat(4, 1fr);
+      gap: clamp(1.25rem, 2.5vw, 2rem);
+    }
+  }
+
+  .ruta__paso {
+    position: relative;
+    padding-top: 2.75rem;
+    border-top: 1px solid var(--negro);
+  }
+
+  .ruta__numero {
+    position: absolute;
+    top: 1rem;
+    left: 0;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    color: var(--tinta-meta);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Punto sobre la línea, en el arranque de cada paso */
+  .ruta__paso::before {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: 0;
+    width: 7px;
+    height: 7px;
+    background: var(--negro);
+  }
+
+  .ruta__paso h3 {
+    font-size: 1.0625rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .ruta__paso p {
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    color: var(--tinta-secundaria);
+  }
+</style>

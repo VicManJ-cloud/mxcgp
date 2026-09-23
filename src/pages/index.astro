@@ -1,0 +1,267 @@
+---
+import Base from '../layouts/Base.astro';
+import Glifo from '../components/Glifo.astro';
+import MarcaFondo from '../components/MarcaFondo.astro';
+import Cierre from '../components/Cierre.astro';
+import { servicios, principios } from '../data/site.js';
+---
+
+<Base
+  titulo="Inicio"
+  descripcion="Acompañamos a gobiernos municipales y estatales en el diseño, la evaluación y la mejora de sus decisiones: capacitación especializada, análisis financiero y diagnóstico institucional."
+>
+  <!-- 01 · Portada -->
+  <section class="portada">
+    <MarcaFondo />
+    <div class="contenedor portada__interior">
+      <p class="etiqueta">Consultoría para el sector público</p>
+
+      <h1 class="display portada__titular">
+        Fortalecemos la gestión pública de los gobiernos estatales y municipales
+        mediante soluciones técnicas y financieras.
+      </h1>
+
+      <p class="portada__texto">
+        Acompañamos a gobiernos municipales y estatales en el diseño, la
+        evaluación y la mejora de sus decisiones. Combinamos capacitación
+        especializada, análisis financiero y diagnóstico institucional para
+        transformar información en herramientas útiles para la administración
+        pública.
+      </p>
+
+      <div class="portada__acciones">
+        <a class="boton" href="/servicios/">
+          Ver servicios <span class="flecha" aria-hidden="true">→</span>
+        </a>
+        <a class="boton boton--linea" href="/contacto/">Conversemos</a>
+      </div>
+    </div>
+
+    <!-- Principios anclados al pie de la banda -->
+    <div class="contenedor">
+      <div class="principios">
+        {principios.map((p, i) => (
+          <article class="principio">
+            <span class="principio__numero">
+              {String(i + 1).padStart(2, '0')}
+            </span>
+            <h2>{p.titulo}</h2>
+            <p>{p.texto}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 · Servicios -->
+  <section class="seccion seccion--superficie">
+    <div class="contenedor">
+      <div class="encabezado">
+        <div>
+          <span class="etiqueta">02 — Servicios</span>
+        </div>
+        <div class="flujo">
+          <h2 class="titulo-seccion">
+            Servicios modulares que pueden contratarse por separado o integrarse
+            en programas de fortalecimiento institucional.
+          </h2>
+          <p class="entradilla medida">
+            Seis líneas de trabajo que cubren desde la formación de equipos
+            hasta el diagnóstico financiero y la mejora de procesos.
+          </p>
+        </div>
+      </div>
+
+      <div class="rejilla rejilla--3 rejilla--separada">
+        {servicios.map((s, i) => (
+          <a
+            class="tarjeta tarjeta--enlace tarjeta--interactiva revelar"
+            href={`/servicios/#${s.id}`}
+          >
+            <div class="tarjeta__cabecera">
+              <span class="tarjeta__numero">
+                {String(i + 1).padStart(2, '0')}
+              </span>
+              <Glifo nombre={s.glifo} />
+            </div>
+            <h3>{s.titulo}</h3>
+            <p>{s.resumen}</p>
+            <span class="tarjeta__pie" aria-hidden="true">Ver detalle →</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 · A quiénes servimos -->
+  <section class="seccion">
+    <div class="contenedor">
+      <div class="encabezado">
+        <div>
+          <span class="etiqueta">03 — Clientes</span>
+        </div>
+        <div class="flujo">
+          <h2 class="titulo-seccion">
+            Instituciones públicas que buscan decidir con mejor información.
+          </h2>
+        </div>
+      </div>
+
+      <div class="rejilla rejilla--3 rejilla--pegada">
+        <article class="tarjeta">
+          <span class="tarjeta__numero">01</span>
+          <h3>Gobiernos municipales</h3>
+          <p>
+            Tesorerías, áreas de planeación, obras públicas y unidades de
+            planeación y evaluación.
+          </p>
+        </article>
+        <article class="tarjeta">
+          <span class="tarjeta__numero">02</span>
+          <h3>Gobiernos estatales</h3>
+          <p>
+            Secretarías de finanzas, planeación, infraestructura y dependencias
+            ejecutoras de proyectos.
+          </p>
+        </article>
+        <article class="tarjeta">
+          <span class="tarjeta__numero">03</span>
+          <h3>Organismos públicos</h3>
+          <p>
+            Entidades descentralizadas y equipos responsables de inversión,
+            administración y mejora de procesos.
+          </p>
+        </article>
+      </div>
+
+      <p class="mas">
+        <a class="enlace" href="/clientes/">
+          Cómo colaboramos <span aria-hidden="true">→</span>
+        </a>
+      </p>
+    </div>
+  </section>
+
+  <Cierre
+    etiqueta="Siguiente paso"
+    titulo="Cuéntanos el reto de tu institución y diseñemos una propuesta de trabajo."
+    boton="Escríbenos"
+  />
+</Base>
+
+<style>
+  /* ------------------------------------------------------------ Portada */
+
+  .portada {
+    position: relative;
+    overflow: hidden;
+    background: var(--negro);
+    color: var(--blanco);
+    padding-block: clamp(3.5rem, 8vw, 6.5rem) 0;
+  }
+
+  .portada__interior {
+    position: relative;
+    z-index: 1;
+    padding-bottom: clamp(3rem, 6vw, 5rem);
+  }
+
+  .portada .etiqueta {
+    color: var(--gris-texto);
+    margin-bottom: clamp(1.5rem, 3vw, 2.25rem);
+  }
+
+  .portada__titular {
+    max-width: 17ch;
+    color: var(--blanco);
+  }
+
+  .portada__texto {
+    max-width: 56ch;
+    margin-top: clamp(1.5rem, 3vw, 2.25rem);
+    font-size: clamp(1rem, 1.3vw, 1.125rem);
+    line-height: 1.7;
+    color: var(--gris-claro);
+  }
+
+  .portada__acciones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: clamp(2rem, 4vw, 2.75rem);
+  }
+
+  /* Tira de principios al pie de la banda, separada por filetes */
+  .principios {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    border-top: 1px solid var(--linea-oscura);
+  }
+
+  @media (min-width: 48rem) {
+    .principios {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .principio + .principio {
+      border-left: 1px solid var(--linea-oscura);
+    }
+  }
+
+  .principio {
+    padding: clamp(1.75rem, 3vw, 2.5rem) clamp(0rem, 2.5vw, 2rem)
+      clamp(1.75rem, 3vw, 2.5rem) 0;
+  }
+  @media (min-width: 48rem) {
+    .principio + .principio {
+      padding-left: clamp(1.5rem, 2.5vw, 2rem);
+    }
+  }
+  @media (max-width: 47.99rem) {
+    .principio + .principio {
+      border-top: 1px solid var(--linea-oscura);
+    }
+  }
+
+  .principio__numero {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    color: var(--gris-texto);
+    margin-bottom: 1rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .principio h2 {
+    font-size: 1.0625rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .principio p {
+    font-size: 0.9375rem;
+    line-height: 1.65;
+    color: var(--gris-claro);
+    max-width: 34ch;
+  }
+
+  /* ----------------------------------------------------------- Servicios */
+
+  .tarjeta__pie {
+    margin-top: auto;
+    padding-top: 0.75rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--tinta-meta);
+    transition: color var(--transicion);
+  }
+  .tarjeta--interactiva:hover .tarjeta__pie {
+    color: var(--negro);
+  }
+
+  .mas {
+    margin-top: clamp(2rem, 4vw, 2.75rem);
+  }
+</style>

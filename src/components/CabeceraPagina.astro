@@ -1,0 +1,49 @@
+---
+import MarcaFondo from './MarcaFondo.astro';
+
+const { etiqueta, titulo, entrada } = Astro.props;
+---
+
+<section class="cabecera-pagina">
+  <MarcaFondo />
+  <div class="contenedor cabecera-pagina__interior">
+    <p class="etiqueta">{etiqueta}</p>
+    <h1 class="titulo-pagina">{titulo}</h1>
+    {entrada && <p class="cabecera-pagina__entrada">{entrada}</p>}
+  </div>
+</section>
+
+<style>
+  .cabecera-pagina {
+    position: relative;
+    overflow: hidden;
+    background: var(--negro);
+    color: var(--blanco);
+    padding-block: clamp(3rem, 6.5vw, 5rem);
+  }
+
+  .cabecera-pagina__interior {
+    position: relative;
+    z-index: 1;
+  }
+
+  .cabecera-pagina .etiqueta {
+    color: var(--gris-texto);
+    margin-bottom: clamp(1.25rem, 2.5vw, 1.75rem);
+  }
+
+  .titulo-pagina {
+    max-width: 20ch;
+    font-size: clamp(2rem, 4.6vw, 3.25rem);
+    letter-spacing: -0.035em;
+    line-height: 1.08;
+  }
+
+  .cabecera-pagina__entrada {
+    max-width: 58ch;
+    margin-top: clamp(1.25rem, 2.5vw, 1.75rem);
+    font-size: clamp(1rem, 1.3vw, 1.125rem);
+    line-height: 1.7;
+    color: var(--gris-claro);
+  }
+</style>

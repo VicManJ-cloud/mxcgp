@@ -1,0 +1,101 @@
+---
+/**
+ * Glifos de línea para los servicios.
+ * Trazo fino y geometría recta, en el mismo lenguaje que el monograma M|X
+ * del manual de identidad. Heredan el color del contenedor (currentColor)
+ * para funcionar igual sobre fondo claro y sobre fondo negro.
+ */
+const { nombre, class: clase } = Astro.props;
+---
+
+<svg
+  class:list={['glifo', clase]}
+  viewBox="0 0 48 48"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.25"
+  stroke-linecap="square"
+  stroke-linejoin="miter"
+  aria-hidden="true"
+  focusable="false"
+>
+  {nombre === 'capacitacion' && (
+    <>
+      {/* Pizarra con barras: formación y evaluación de proyectos */}
+      <rect x="6" y="8" width="36" height="25" />
+      <line x1="14" y1="27" x2="14" y2="19" />
+      <line x1="21" y1="27" x2="21" y2="14" />
+      <line x1="28" y1="27" x2="28" y2="22" />
+      <line x1="35" y1="27" x2="35" y2="16" />
+      <line x1="24" y1="33" x2="24" y2="40" />
+      <line x1="16" y1="40" x2="32" y2="40" />
+    </>
+  )}
+
+  {nombre === 'finanzas' && (
+    <>
+      {/* Ejes y curva de resultado: análisis financiero */}
+      <polyline points="8,8 8,40 42,40" />
+      <polyline points="14,33 22,25 29,29 39,15" />
+      <circle cx="39" cy="15" r="2.5" fill="currentColor" stroke="none" />
+    </>
+  )}
+
+  {nombre === 'diagnostico' && (
+    <>
+      {/* Organigrama: estructura y procesos de la administración */}
+      <rect x="18" y="7" width="12" height="9" />
+      <line x1="24" y1="16" x2="24" y2="22" />
+      <line x1="11" y1="22" x2="37" y2="22" />
+      <line x1="11" y1="22" x2="11" y2="28" />
+      <line x1="37" y1="22" x2="37" y2="28" />
+      <rect x="5" y="28" width="12" height="9" />
+      <rect x="31" y="28" width="12" height="9" />
+    </>
+  )}
+
+  {nombre === 'mejora' && (
+    <>
+      {/* Hoja de ruta con hitos: planes de mejora institucional */}
+      <line x1="6" y1="30" x2="42" y2="30" />
+      <circle cx="12" cy="30" r="2.5" fill="currentColor" stroke="none" />
+      <circle cx="24" cy="30" r="2.5" fill="currentColor" stroke="none" />
+      <circle cx="36" cy="30" r="2.5" />
+      <line x1="36" y1="30" x2="36" y2="12" />
+      <polyline points="36,12 44,15 36,18" />
+    </>
+  )}
+
+  {nombre === 'predial' && (
+    <>
+      {/* Predio sobre retícula catastral: impuesto predial */}
+      <polyline points="13,23 24,12 35,23" />
+      <polyline points="17,23 17,36 31,36 31,23" />
+      <line x1="6" y1="41" x2="42" y2="41" />
+      <line x1="12" y1="41" x2="12" y2="44" />
+      <line x1="24" y1="41" x2="24" y2="44" />
+      <line x1="36" y1="41" x2="36" y2="44" />
+    </>
+  )}
+
+  {nombre === 'asesoria' && (
+    <>
+      {/* Estudios superpuestos: acompañamiento técnico */}
+      <rect x="6" y="13" width="21" height="27" />
+      <rect x="21" y="8" width="21" height="27" fill="var(--fondo-glifo, #ffffff)" />
+      <line x1="26" y1="17" x2="37" y2="17" />
+      <line x1="26" y1="22" x2="37" y2="22" />
+      <line x1="26" y1="27" x2="33" y2="27" />
+    </>
+  )}
+</svg>
+
+<style>
+  .glifo {
+    display: block;
+    width: 2.75rem;
+    height: 2.75rem;
+    color: var(--negro);
+    overflow: visible;
+  }
+</style>

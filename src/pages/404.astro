@@ -1,0 +1,64 @@
+---
+import Base from '../layouts/Base.astro';
+import MarcaFondo from '../components/MarcaFondo.astro';
+---
+
+<Base titulo="Página no encontrada">
+  <section class="error">
+    <MarcaFondo />
+    <div class="contenedor error__interior">
+      <p class="etiqueta">Error 404</p>
+      <h1 class="error__titulo">
+        La página que buscas no existe o cambió de dirección.
+      </h1>
+      <p class="error__texto">
+        Revisa la dirección o vuelve al inicio para continuar navegando.
+      </p>
+      <p class="error__acciones">
+        <a class="boton" href="/">
+          Ir al inicio <span class="flecha" aria-hidden="true">→</span>
+        </a>
+        <a class="boton boton--linea" href="/contacto/">Contacto</a>
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .error {
+    position: relative;
+    overflow: hidden;
+    background: var(--negro);
+    color: var(--blanco);
+    padding-block: clamp(4rem, 10vw, 7.5rem);
+  }
+
+  .error__interior {
+    position: relative;
+    z-index: 1;
+  }
+
+  .error .etiqueta {
+    color: var(--gris-texto);
+    margin-bottom: 1.5rem;
+  }
+
+  .error__titulo {
+    max-width: 20ch;
+    font-size: clamp(1.9rem, 4.4vw, 3rem);
+    letter-spacing: -0.035em;
+    margin-bottom: 1.25rem;
+  }
+
+  .error__texto {
+    max-width: 48ch;
+    color: var(--gris-claro);
+  }
+
+  .error__acciones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 2.25rem;
+  }
+</style>

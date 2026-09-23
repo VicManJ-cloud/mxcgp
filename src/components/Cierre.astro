@@ -1,0 +1,23 @@
+---
+import MarcaFondo from './MarcaFondo.astro';
+
+const {
+  etiqueta = 'Siguiente paso',
+  titulo,
+  boton = 'Escríbenos',
+  href = '/contacto/',
+} = Astro.props;
+---
+
+<section class="seccion seccion--oscura">
+  <MarcaFondo />
+  <div class="contenedor cierre">
+    <div class="flujo">
+      <span class="etiqueta">{etiqueta}</span>
+      <h2 class="titulo-seccion medida">{titulo}</h2>
+    </div>
+    <a class="boton" href={href}>
+      {boton} <span class="flecha" aria-hidden="true">→</span>
+    </a>
+  </div>
+</section>

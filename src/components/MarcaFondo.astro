@@ -1,0 +1,51 @@
+---
+/**
+ * Trazo de marca al fondo de las bandas oscuras.
+ * Reproduce en grande la geometría del monograma M|X del manual —la M de
+ * trazo fino, la línea vertical con punto y la X— a muy baja opacidad.
+ * Es textura, no contenido: siempre aria-hidden.
+ */
+const { class: clase } = Astro.props;
+---
+
+<svg
+  class:list={['marca-fondo', clase]}
+  viewBox="0 0 320 300"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  aria-hidden="true"
+  focusable="false"
+  preserveAspectRatio="xMidYMid meet"
+>
+  <!-- M -->
+  <path d="M40 270 V30 L110 160 L180 30" />
+  <!-- X -->
+  <path d="M175 30 L285 270" />
+  <path d="M285 30 L175 270" />
+  <!-- Filete vertical con punto, eje del monograma -->
+  <line x1="160" y1="16" x2="160" y2="284" stroke-width="1" />
+  <circle cx="160" cy="150" r="5" fill="currentColor" stroke="none" />
+</svg>
+
+<style>
+  .marca-fondo {
+    position: absolute;
+    top: 50%;
+    right: clamp(-4rem, -2vw, 0rem);
+    translate: 0 -50%;
+    height: clamp(18rem, 46vw, 34rem);
+    width: auto;
+    color: var(--blanco);
+    opacity: 0.07;
+    pointer-events: none;
+  }
+
+  @media (max-width: 47.99rem) {
+    .marca-fondo {
+      height: 22rem;
+      right: -6rem;
+      opacity: 0.05;
+    }
+  }
+</style>

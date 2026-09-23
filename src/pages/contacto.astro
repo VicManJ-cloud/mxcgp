@@ -1,0 +1,362 @@
+---
+import Base from '../layouts/Base.astro';
+import CabeceraPagina from '../components/CabeceraPagina.astro';
+import { empresa, servicios } from '../data/site.js';
+---
+
+<Base
+  titulo="Contacto"
+  descripcion="Escríbenos para explorar el alcance de una posible colaboración en capacitación, evaluación de proyectos, análisis financiero o diagnóstico de mejora administrativa."
+>
+  <CabeceraPagina
+    etiqueta="05 — Contacto"
+    titulo="Conversemos sobre los retos de tu gobierno"
+    entrada="Si tu institución requiere capacitación, evaluación de proyectos, análisis financiero o un diagnóstico de mejora administrativa, escríbenos para explorar el alcance de una posible colaboración."
+  />
+
+  <section class="seccion seccion--superficie">
+    <div class="contenedor">
+      <div class="contacto">
+        <aside class="contacto__datos">
+          <div class="tarjeta">
+            <span class="tarjeta__numero">Correo</span>
+            <p class="contacto__correo">
+              <a href={`mailto:${empresa.correo}`}>{empresa.correo}</a>
+            </p>
+          </div>
+
+          <div class="tarjeta">
+            <span class="tarjeta__numero">Cobertura</span>
+            <p>
+              Gobiernos municipales, estatales y organismos públicos en todo
+              México.
+            </p>
+          </div>
+
+          <div class="tarjeta">
+            <span class="tarjeta__numero">Qué esperar</span>
+            <p>
+              Respondemos con una propuesta de alcance a partir del reto que nos
+              describas: objetivos, entregables y forma de trabajo.
+            </p>
+          </div>
+        </aside>
+
+        <form class="formulario tarjeta" data-formulario novalidate>
+          <p class="formulario__intro texto-secundario">
+            Completa los campos y se abrirá tu programa de correo con el mensaje
+            listo para enviar.
+          </p>
+
+          <div class="campos">
+            <p class="campo">
+              <label for="nombre">Nombre <span aria-hidden="true">*</span></label>
+              <input id="nombre" name="nombre" type="text" required autocomplete="name" />
+            </p>
+
+            <p class="campo">
+              <label for="institucion">Institución <span aria-hidden="true">*</span></label>
+              <input id="institucion" name="institucion" type="text" required autocomplete="organization" />
+            </p>
+
+            <p class="campo">
+              <label for="cargo">Cargo</label>
+              <input id="cargo" name="cargo" type="text" autocomplete="organization-title" />
+            </p>
+
+            <p class="campo">
+              <label for="correo">Correo <span aria-hidden="true">*</span></label>
+              <input id="correo" name="correo" type="email" required autocomplete="email" />
+            </p>
+
+            <p class="campo campo--ancho">
+              <label for="servicio">Servicio de interés</label>
+              <select id="servicio" name="servicio">
+                <option value="">Selecciona una opción</option>
+                {servicios.map((s) => (
+                  <option value={s.titulo}>{s.titulo}</option>
+                ))}
+                <option value="Otro">Otro / aún por definir</option>
+              </select>
+            </p>
+
+            <p class="campo campo--ancho">
+              <label for="mensaje">Mensaje <span aria-hidden="true">*</span></label>
+              <textarea
+                id="mensaje"
+                name="mensaje"
+                rows="6"
+                required
+                placeholder="Describe brevemente el reto de tu institución."></textarea>
+            </p>
+          </div>
+
+          <p class="aviso">
+            <input id="privacidad" name="privacidad" type="checkbox" required />
+            <label for="privacidad">
+              He leído y acepto el
+              <a href="/aviso-privacidad/">aviso de privacidad</a>.
+            </label>
+          </p>
+
+          <p class="formulario__error" data-error role="alert" hidden></p>
+
+          <button class="boton" type="submit">
+            Preparar correo <span class="flecha" aria-hidden="true">→</span>
+          </button>
+
+          <p class="formulario__nota">
+            Los campos marcados con <span aria-hidden="true">*</span> son
+            obligatorios. Si tu equipo no abre el correo desde el navegador,
+            escríbenos directamente a
+            <a href={`mailto:${empresa.correo}`}>{empresa.correo}</a>.
+          </p>
+        </form>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .contacto {
+    display: grid;
+    gap: clamp(2.5rem, 6vw, 5rem);
+  }
+  @media (min-width: 62rem) {
+    .contacto {
+      grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    }
+  }
+
+  .contacto__datos {
+    display: grid;
+    gap: clamp(1rem, 2vw, 1.5rem);
+    align-content: start;
+  }
+
+  .contacto__correo {
+    font-size: clamp(1.0625rem, 1.8vw, 1.1875rem);
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    word-break: break-word;
+    color: var(--tinta);
+  }
+  .contacto__correo a {
+    text-decoration: none;
+    border-bottom: 1px solid var(--linea);
+    transition: border-color var(--transicion);
+  }
+  .contacto__correo a:hover {
+    border-bottom-color: var(--negro);
+  }
+
+  /* ---------------------------------------------------------- Formulario */
+
+  /* La tarjeta del formulario usa flujo normal, no el flex de .tarjeta */
+  .formulario.tarjeta {
+    display: block;
+    padding: clamp(1.5rem, 3vw, 2.5rem);
+  }
+
+  .formulario__intro {
+    font-size: 0.9375rem;
+    margin-bottom: 2.25rem;
+  }
+
+  .campos {
+    display: grid;
+    gap: 1.75rem;
+  }
+  @media (min-width: 40rem) {
+    .campos {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.75rem 2rem;
+    }
+    .campo--ancho {
+      grid-column: 1 / -1;
+    }
+  }
+
+  .campo {
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .campo label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--tinta-meta);
+  }
+  .campo label span {
+    color: var(--negro);
+  }
+
+  input[type='text'],
+  input[type='email'],
+  select,
+  textarea {
+    width: 100%;
+    padding: 0.75rem 0;
+    font: inherit;
+    font-size: 1rem;
+    color: var(--tinta);
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid var(--gris-texto);
+    border-radius: 0;
+    transition: border-color var(--transicion);
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 7rem;
+  }
+  select {
+    cursor: pointer;
+  }
+
+  input:hover,
+  select:hover,
+  textarea:hover {
+    border-bottom-color: var(--negro);
+  }
+
+  input:focus,
+  select:focus,
+  textarea:focus {
+    outline: none;
+    border-bottom-color: var(--negro);
+    border-bottom-width: 2px;
+    padding-bottom: calc(0.75rem - 1px);
+  }
+
+  input[aria-invalid='true'],
+  textarea[aria-invalid='true'],
+  select[aria-invalid='true'] {
+    border-bottom-color: #b00020;
+  }
+
+  .aviso {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin-top: 2.25rem;
+    padding-top: 1.75rem;
+    border-top: 1px solid var(--linea);
+  }
+  .aviso input {
+    width: 1.0625rem;
+    height: 1.0625rem;
+    margin: 0.2rem 0 0;
+    accent-color: var(--negro);
+    flex-shrink: 0;
+  }
+  .aviso label {
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: var(--tinta-secundaria);
+  }
+  .aviso a {
+    color: var(--negro);
+  }
+
+  .formulario__error {
+    margin-top: 1.25rem;
+    font-size: 0.9375rem;
+    color: #b00020;
+  }
+  .formulario__error[hidden] {
+    display: none;
+  }
+
+  .formulario button {
+    margin-top: 2rem;
+  }
+
+  .formulario__nota {
+    margin-top: 1.75rem;
+    font-size: 0.8125rem;
+    line-height: 1.65;
+    color: var(--tinta-meta);
+  }
+  .formulario__nota a {
+    color: var(--tinta-secundaria);
+  }
+</style>
+
+<script define:vars={{ correo: empresa.correo }}>
+  const formulario = document.querySelector('[data-formulario]');
+  const errorEl = document.querySelector('[data-error]');
+
+  if (formulario) {
+    formulario.addEventListener('submit', (evento) => {
+      evento.preventDefault();
+
+      const datos = new FormData(formulario);
+      const valor = (clave) => String(datos.get(clave) ?? '').trim();
+
+      // El formulario lleva novalidate para controlar nosotros el mensaje,
+      // el foco y el marcado de los campos que fallan.
+      const requeridos = ['nombre', 'institucion', 'correo', 'mensaje'];
+      let primerFallo = null;
+
+      for (const clave of requeridos) {
+        const campo = formulario.elements[clave];
+        const vacio = valor(clave) === '';
+        const correoInvalido =
+          clave === 'correo' && !vacio && !campo.checkValidity();
+        const falla = vacio || correoInvalido;
+        campo.setAttribute('aria-invalid', String(falla));
+        if (falla && !primerFallo) primerFallo = campo;
+      }
+
+      const privacidad = formulario.elements['privacidad'];
+      const faltaPrivacidad = !privacidad.checked;
+      if (faltaPrivacidad && !primerFallo) primerFallo = privacidad;
+
+      if (primerFallo) {
+        errorEl.textContent =
+          primerFallo === privacidad
+            ? 'Para continuar es necesario aceptar el aviso de privacidad.'
+            : 'Revisa los campos obligatorios antes de continuar.';
+        errorEl.hidden = false;
+        primerFallo.focus();
+        return;
+      }
+
+      errorEl.hidden = true;
+
+      const asunto = 'Solicitud de contacto — ' + valor('institucion');
+      const cuerpo = [
+        'Nombre: ' + valor('nombre'),
+        'Institución: ' + valor('institucion'),
+        'Cargo: ' + (valor('cargo') || 'No especificado'),
+        'Correo: ' + valor('correo'),
+        'Servicio de interés: ' + (valor('servicio') || 'No especificado'),
+        '',
+        'Mensaje:',
+        valor('mensaje'),
+        '',
+        '—',
+        'Enviado desde el formulario del sitio web.',
+      ].join('\r\n');
+
+      window.location.href =
+        'mailto:' +
+        correo +
+        '?subject=' +
+        encodeURIComponent(asunto) +
+        '&body=' +
+        encodeURIComponent(cuerpo);
+    });
+
+    // Limpia la marca de error en cuanto el usuario corrige el campo.
+    formulario.addEventListener('input', (e) => {
+      if (e.target.getAttribute('aria-invalid') === 'true') {
+        e.target.setAttribute('aria-invalid', 'false');
+      }
+    });
+  }
+</script>

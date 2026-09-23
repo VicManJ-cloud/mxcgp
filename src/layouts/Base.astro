@@ -1,0 +1,64 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { empresa } from '../data/site.js';
+
+const { titulo, descripcion = empresa.descripcion } = Astro.props;
+const tituloCompleto = titulo
+  ? `${titulo} · ${empresa.nombreCorto}`
+  : empresa.nombre;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="es-MX">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{tituloCompleto}</title>
+    <meta name="description" content={descripcion} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="theme-color" content="#1a1a1a" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={empresa.nombre} />
+    <meta property="og:title" content={tituloCompleto} />
+    <meta property="og:description" content={descripcion} />
+    <meta property="og:locale" content="es_MX" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL('/logo/mx-horizontal.png', Astro.site)} />
+    <meta name="twitter:card" content="summary_large_image" />
+  </head>
+
+  <body>
+    <a class="salto-contenido" href="#contenido">Saltar al contenido</a>
+    <Header />
+    <main id="contenido">
+      <slot />
+    </main>
+    <Footer />
+
+    <script>
+      // Revelado progresivo al entrar en viewport.
+      const objetivos = document.querySelectorAll('.revelar');
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && objetivos.length) {
+        const observador = new IntersectionObserver(
+          (entradas) => {
+            for (const entrada of entradas) {
+              if (entrada.isIntersecting) {
+                entrada.target.classList.add('visible');
+                observador.unobserve(entrada.target);
+              }
+            }
+          },
+          { rootMargin: '0px 0px -12% 0px', threshold: 0.08 }
+        );
+        objetivos.forEach((el) => observador.observe(el));
+      } else {
+        objetivos.forEach((el) => el.classList.add('visible'));
+      }
+    </script>
+  </body>
+</html>
