@@ -93,9 +93,15 @@ const { nombre, class: clase } = Astro.props;
 <style>
   .glifo {
     display: block;
-    width: 2.75rem;
-    height: 2.75rem;
-    color: var(--negro);
+    width: 2.5rem;
+    height: 2.5rem;
+    color: var(--indigo);
     overflow: visible;
+    flex-shrink: 0;
+  }
+
+  /* Sobre lienzo oscuro el acento se aclara para mantener el contraste */
+  :global(.banda--oscura) .glifo {
+    color: var(--indigo-vivo);
   }
 </style>

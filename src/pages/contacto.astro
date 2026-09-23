@@ -10,11 +10,12 @@ import { empresa, servicios } from '../data/site.js';
 >
   <CabeceraPagina
     etiqueta="05 — Contacto"
-    titulo="Conversemos sobre los retos de tu gobierno"
+    titulo="Conversemos sobre los retos de tu"
+    acento="gobierno"
     entrada="Si tu institución requiere capacitación, evaluación de proyectos, análisis financiero o un diagnóstico de mejora administrativa, escríbenos para explorar el alcance de una posible colaboración."
   />
 
-  <section class="seccion seccion--superficie">
+  <section class="banda banda--hueso">
     <div class="contenedor">
       <div class="contacto">
         <aside class="contacto__datos">
@@ -42,8 +43,8 @@ import { empresa, servicios } from '../data/site.js';
           </div>
         </aside>
 
-        <form class="formulario tarjeta" data-formulario novalidate>
-          <p class="formulario__intro texto-secundario">
+        <form class="formulario" data-formulario novalidate>
+          <p class="formulario__intro">
             Completa los campos y se abrirá tu programa de correo con el mensaje
             listo para enviar.
           </p>
@@ -55,7 +56,9 @@ import { empresa, servicios } from '../data/site.js';
             </p>
 
             <p class="campo">
-              <label for="institucion">Institución <span aria-hidden="true">*</span></label>
+              <label for="institucion">
+                Institución <span aria-hidden="true">*</span>
+              </label>
               <input id="institucion" name="institucion" type="text" required autocomplete="organization" />
             </p>
 
@@ -120,57 +123,59 @@ import { empresa, servicios } from '../data/site.js';
 <style>
   .contacto {
     display: grid;
-    gap: clamp(2.5rem, 6vw, 5rem);
+    gap: var(--e24);
   }
   @media (min-width: 62rem) {
     .contacto {
-      grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+      grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+      gap: var(--e32);
     }
   }
 
   .contacto__datos {
     display: grid;
-    gap: clamp(1rem, 2vw, 1.5rem);
+    gap: var(--e16);
     align-content: start;
   }
 
   .contacto__correo {
-    font-size: clamp(1.0625rem, 1.8vw, 1.1875rem);
-    font-weight: 700;
-    letter-spacing: -0.015em;
+    font-size: 1.0625rem;
+    font-weight: 500;
     word-break: break-word;
     color: var(--tinta);
   }
   .contacto__correo a {
+    color: var(--indigo);
     text-decoration: none;
-    border-bottom: 1px solid var(--linea);
+    border-bottom: 1px solid var(--indigo-lavado);
     transition: border-color var(--transicion);
   }
   .contacto__correo a:hover {
-    border-bottom-color: var(--negro);
+    border-bottom-color: var(--indigo);
   }
 
   /* ---------------------------------------------------------- Formulario */
 
-  /* La tarjeta del formulario usa flujo normal, no el flex de .tarjeta */
-  .formulario.tarjeta {
-    display: block;
+  .formulario {
     padding: clamp(1.5rem, 3vw, 2.5rem);
+    border-radius: var(--r-tarjeta-lg);
+    background: var(--papel);
+    border: 1px solid var(--linea);
   }
 
   .formulario__intro {
     font-size: 0.9375rem;
-    margin-bottom: 2.25rem;
+    color: var(--tinta-sec);
+    margin-bottom: var(--e32);
   }
 
   .campos {
     display: grid;
-    gap: 1.75rem;
+    gap: var(--e16);
   }
   @media (min-width: 40rem) {
     .campos {
       grid-template-columns: repeat(2, 1fr);
-      gap: 1.75rem 2rem;
     }
     .campo--ancho {
       grid-column: 1 / -1;
@@ -179,18 +184,16 @@ import { empresa, servicios } from '../data/site.js';
 
   .campo {
     display: grid;
-    gap: 0.5rem;
+    gap: var(--e8);
   }
 
   .campo label {
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--tinta-meta);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--tinta-sec);
   }
   .campo label span {
-    color: var(--negro);
+    color: var(--indigo);
   }
 
   input[type='text'],
@@ -198,20 +201,19 @@ import { empresa, servicios } from '../data/site.js';
   select,
   textarea {
     width: 100%;
-    padding: 0.75rem 0;
+    padding: 0.75rem 1rem;
     font: inherit;
-    font-size: 1rem;
+    font-size: 0.9375rem;
     color: var(--tinta);
-    background: transparent;
-    border: 0;
-    border-bottom: 1px solid var(--gris-texto);
-    border-radius: 0;
-    transition: border-color var(--transicion);
+    background: var(--hueso);
+    border: 1px solid transparent;
+    border-radius: var(--r-campo);
+    transition: border-color var(--transicion), background var(--transicion);
   }
 
   textarea {
     resize: vertical;
-    min-height: 7rem;
+    min-height: 8rem;
   }
   select {
     cursor: pointer;
@@ -220,50 +222,50 @@ import { empresa, servicios } from '../data/site.js';
   input:hover,
   select:hover,
   textarea:hover {
-    border-bottom-color: var(--negro);
+    border-color: var(--linea-fuerte);
   }
 
   input:focus,
   select:focus,
   textarea:focus {
     outline: none;
-    border-bottom-color: var(--negro);
-    border-bottom-width: 2px;
-    padding-bottom: calc(0.75rem - 1px);
+    background: var(--papel);
+    border-color: var(--indigo);
+    box-shadow: 0 0 0 3px var(--indigo-lavado);
   }
 
   input[aria-invalid='true'],
   textarea[aria-invalid='true'],
   select[aria-invalid='true'] {
-    border-bottom-color: #b00020;
+    border-color: #b00020;
   }
 
   .aviso {
     display: flex;
     align-items: flex-start;
     gap: 0.75rem;
-    margin-top: 2.25rem;
-    padding-top: 1.75rem;
+    margin-top: var(--e24);
+    padding-top: var(--e24);
     border-top: 1px solid var(--linea);
   }
   .aviso input {
     width: 1.0625rem;
     height: 1.0625rem;
-    margin: 0.2rem 0 0;
-    accent-color: var(--negro);
+    margin: 0.1875rem 0 0;
+    accent-color: var(--indigo);
     flex-shrink: 0;
   }
   .aviso label {
     font-size: 0.9375rem;
-    line-height: 1.6;
-    color: var(--tinta-secundaria);
+    line-height: 1.5;
+    color: var(--tinta-sec);
   }
   .aviso a {
-    color: var(--negro);
+    color: var(--indigo);
   }
 
   .formulario__error {
-    margin-top: 1.25rem;
+    margin-top: var(--e16);
     font-size: 0.9375rem;
     color: #b00020;
   }
@@ -272,17 +274,17 @@ import { empresa, servicios } from '../data/site.js';
   }
 
   .formulario button {
-    margin-top: 2rem;
+    margin-top: var(--e24);
   }
 
   .formulario__nota {
-    margin-top: 1.75rem;
+    margin-top: var(--e24);
     font-size: 0.8125rem;
-    line-height: 1.65;
+    line-height: 1.6;
     color: var(--tinta-meta);
   }
   .formulario__nota a {
-    color: var(--tinta-secundaria);
+    color: var(--tinta-sec);
   }
 </style>
 
@@ -313,8 +315,7 @@ import { empresa, servicios } from '../data/site.js';
       }
 
       const privacidad = formulario.elements['privacidad'];
-      const faltaPrivacidad = !privacidad.checked;
-      if (faltaPrivacidad && !primerFallo) primerFallo = privacidad;
+      if (!privacidad.checked && !primerFallo) primerFallo = privacidad;
 
       if (primerFallo) {
         errorEl.textContent =

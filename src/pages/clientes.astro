@@ -49,13 +49,14 @@ const colaboracion = [
 >
   <CabeceraPagina
     etiqueta="03 — Clientes"
-    titulo="A quiénes dirigimos nuestros servicios"
+    titulo="A quiénes dirigimos nuestros"
+    acento="servicios"
     entrada="Trabajamos con instituciones públicas que buscan fortalecer sus capacidades técnicas, mejorar su gestión financiera y tomar decisiones de inversión con mayor información."
   />
 
-  <section class="seccion">
+  <section class="banda banda--clara">
     <div class="contenedor">
-      <div class="rejilla rejilla--3 rejilla--pegada">
+      <div class="rejilla rejilla--3">
         {destinatarios.map((d, i) => (
           <article class="tarjeta revelar">
             <span class="tarjeta__numero">
@@ -69,17 +70,17 @@ const colaboracion = [
     </div>
   </section>
 
-  <section class="seccion seccion--superficie">
+  <section class="banda banda--hueso">
     <div class="contenedor">
       <div class="encabezado">
-        <div>
-          <span class="etiqueta">Forma de colaboración</span>
-        </div>
-        <div class="flujo">
-          <h2 class="titulo-seccion">
-            Un proceso ordenado, del diagnóstico al seguimiento.
-          </h2>
-        </div>
+        <p class="etiqueta">Forma de colaboración</p>
+        <h2 class="display--sm">
+          Del diagnóstico al <span class="acento">seguimiento</span>
+        </h2>
+        <p class="entradilla">
+          Un proceso ordenado, con alcance y entregables definidos desde el
+          inicio.
+        </p>
       </div>
 
       <ol class="ruta">
@@ -95,64 +96,65 @@ const colaboracion = [
   </section>
 
   <Cierre
-    titulo="¿Tu institución enfrenta un reto de gestión o de finanzas públicas?"
+    titulo="¿Tu institución enfrenta un reto de gestión o de finanzas"
+    acento="públicas?"
     boton="Conversemos"
   />
 </Base>
 
 <style>
-  /* Ruta de colaboración: pasos unidos por una línea continua */
   .ruta {
     list-style: none;
     margin: 0;
     padding: 0;
     display: grid;
-    gap: clamp(1.75rem, 3vw, 2.25rem);
+    gap: var(--e32);
   }
 
   @media (min-width: 48rem) {
     .ruta {
       grid-template-columns: repeat(4, 1fr);
-      gap: clamp(1.25rem, 2.5vw, 2rem);
+      gap: var(--e24);
     }
   }
 
+  /* Cada paso arranca con un punto sobre su propio filete */
   .ruta__paso {
     position: relative;
-    padding-top: 2.75rem;
-    border-top: 1px solid var(--negro);
+    padding-top: var(--e40);
+    border-top: 1px solid var(--linea-fuerte);
+  }
+
+  .ruta__paso::before {
+    content: '';
+    position: absolute;
+    top: -4.5px;
+    left: 0;
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: var(--indigo);
   }
 
   .ruta__numero {
     position: absolute;
-    top: 1rem;
+    top: var(--e16);
     left: 0;
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.18em;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.143em;
     color: var(--tinta-meta);
     font-variant-numeric: tabular-nums;
   }
 
-  /* Punto sobre la línea, en el arranque de cada paso */
-  .ruta__paso::before {
-    content: '';
-    position: absolute;
-    top: -4px;
-    left: 0;
-    width: 7px;
-    height: 7px;
-    background: var(--negro);
-  }
-
   .ruta__paso h3 {
     font-size: 1.0625rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: var(--e8);
   }
 
   .ruta__paso p {
     font-size: 0.9375rem;
-    line-height: 1.7;
-    color: var(--tinta-secundaria);
+    line-height: 1.6;
+    color: var(--tinta-sec);
   }
 </style>

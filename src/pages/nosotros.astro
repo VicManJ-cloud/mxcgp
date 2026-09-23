@@ -33,20 +33,21 @@ const formaDeTrabajar = [
 >
   <CabeceraPagina
     etiqueta="04 — Nosotros"
-    titulo="Experiencia al servicio de las instituciones"
+    titulo="Experiencia al servicio de las"
+    acento="instituciones"
   />
 
-  <section class="seccion">
+  <section class="banda banda--clara">
     <div class="contenedor">
       <div class="perfil">
-        <div class="perfil__texto flujo">
+        <div class="perfil__texto">
           <p class="entradilla">
             MX Consultores en Gestión Pública está integrado por especialistas
             en capacitación, evaluación de proyectos y finanzas públicas que han
             laborado en diversas dependencias públicas y financieras y gobiernos
             estatales.
           </p>
-          <p class="texto-secundario">
+          <p class="texto-sec">
             Esta trayectoria reúne conocimientos técnicos y experiencia directa
             en el funcionamiento de la administración pública. Nuestro enfoque
             consiste en comprender las necesidades de cada institución y
@@ -55,29 +56,39 @@ const formaDeTrabajar = [
           </p>
         </div>
 
-        <!-- Panel de marca. Aquí puede entrar una fotografía del equipo
-             cuando exista: sustituir el contenido por <img>. -->
-        <aside class="perfil__marca" aria-hidden="true">
-          <img src="/logo/mx-vertical.png" alt="" width="800" height="800" />
+        <!-- Cita editorial: el único trazo serif del sistema.
+             Si en el futuro hay fotografía del equipo, este panel es el
+             lugar donde entraría. -->
+        <aside class="perfil__panel">
+          <blockquote class="cita">
+            <p class="serif cita__texto">
+              Traducir el análisis en recomendaciones claras, viables y
+              orientadas a resultados.
+            </p>
+            <img
+              class="cita__marca"
+              src="/logo/mx-vertical.png"
+              alt=""
+              width="800"
+              height="800"
+              loading="lazy"
+            />
+          </blockquote>
         </aside>
       </div>
     </div>
   </section>
 
-  <section class="seccion seccion--superficie">
+  <section class="banda banda--hueso">
     <div class="contenedor">
       <div class="encabezado">
-        <div>
-          <span class="etiqueta">Nuestra forma de trabajar</span>
-        </div>
-        <div class="flujo">
-          <h2 class="titulo-seccion">
-            Del diagnóstico a la capacidad instalada.
-          </h2>
-        </div>
+        <p class="etiqueta">Nuestra forma de trabajar</p>
+        <h2 class="display--sm">
+          Del diagnóstico a la <span class="acento">capacidad</span> instalada
+        </h2>
       </div>
 
-      <div class="rejilla rejilla--4 rejilla--pegada">
+      <div class="rejilla rejilla--4">
         {formaDeTrabajar.map((p, i) => (
           <article class="tarjeta revelar">
             <span class="tarjeta__numero">
@@ -91,7 +102,11 @@ const formaDeTrabajar = [
     </div>
   </section>
 
-  <Cierre titulo="Conversemos sobre los retos de tu gobierno." boton="Contactar" />
+  <Cierre
+    titulo="Conversemos sobre los retos de tu"
+    acento="gobierno"
+    boton="Contactar"
+  />
 </Base>
 
 <style>
@@ -103,20 +118,39 @@ const formaDeTrabajar = [
 
   @media (min-width: 62rem) {
     .perfil {
-      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
     }
   }
 
-  .perfil__marca {
-    display: grid;
-    place-items: center;
-    padding: clamp(2rem, 5vw, 3.5rem);
-    background: var(--superficie);
+  .perfil__texto > * + * {
+    margin-top: var(--e24);
+  }
+
+  .perfil__panel {
+    padding: clamp(1.75rem, 4vw, 2.75rem);
+    border-radius: var(--r-tarjeta-lg);
+    background: var(--hueso);
     border: 1px solid var(--linea);
   }
 
-  .perfil__marca img {
-    width: min(100%, 18rem);
+  .cita {
+    margin: 0;
+    display: grid;
+    gap: var(--e32);
+    justify-items: start;
+  }
+
+  .cita__texto {
+    font-size: clamp(1.375rem, 2.4vw, 1.75rem);
+    line-height: 1.25;
+    letter-spacing: -0.05em;
+    color: var(--tinta);
+    text-wrap: balance;
+  }
+
+  .cita__marca {
+    width: 5.5rem;
+    opacity: 0.75;
     mix-blend-mode: multiply;
   }
 </style>

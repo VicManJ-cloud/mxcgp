@@ -1,23 +1,42 @@
 ---
-import MarcaFondo from './MarcaFondo.astro';
+import Orbe from './Orbe.astro';
 
 const {
   etiqueta = 'Siguiente paso',
   titulo,
+  acento,
   boton = 'Escríbenos',
   href = '/contacto/',
 } = Astro.props;
 ---
 
-<section class="seccion seccion--oscura">
-  <MarcaFondo />
-  <div class="contenedor cierre">
-    <div class="flujo">
-      <span class="etiqueta">{etiqueta}</span>
-      <h2 class="titulo-seccion medida">{titulo}</h2>
-    </div>
+<section class="banda banda--oscura cierre">
+  <Orbe posicion="inferior" tono="indigo" />
+  <div class="contenedor banda__interior cierre__interior">
+    <p class="etiqueta">{etiqueta}</p>
+    <h2 class="display--sm cierre__titulo">
+      {titulo}{acento && <> <span class="acento">{acento}</span></>}
+    </h2>
     <a class="boton" href={href}>
       {boton} <span class="flecha" aria-hidden="true">→</span>
     </a>
   </div>
 </section>
+
+<style>
+  .cierre__interior {
+    display: grid;
+    justify-items: center;
+    text-align: center;
+    gap: var(--e24);
+  }
+
+  .cierre__titulo {
+    max-width: 22ch;
+    color: var(--blanco);
+  }
+
+  .cierre .boton {
+    margin-top: var(--e8);
+  }
+</style>

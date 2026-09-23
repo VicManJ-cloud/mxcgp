@@ -1,7 +1,8 @@
 ---
 import Base from '../layouts/Base.astro';
+import Orbe from '../components/Orbe.astro';
+import Entregables from '../components/Entregables.astro';
 import Glifo from '../components/Glifo.astro';
-import MarcaFondo from '../components/MarcaFondo.astro';
 import Cierre from '../components/Cierre.astro';
 import { servicios, principios } from '../data/site.js';
 ---
@@ -11,14 +12,18 @@ import { servicios, principios } from '../data/site.js';
   descripcion="Acompañamos a gobiernos municipales y estatales en el diseño, la evaluación y la mejora de sus decisiones: capacitación especializada, análisis financiero y diagnóstico institucional."
 >
   <!-- 01 · Portada -->
-  <section class="portada">
-    <MarcaFondo />
-    <div class="contenedor portada__interior">
-      <p class="etiqueta">Consultoría para el sector público</p>
+  <section class="banda--oscura portada">
+    <Orbe posicion="derecha" tono="indigo" />
+    <Orbe posicion="izquierda" tono="ambar" />
+
+    <div class="contenedor banda__interior portada__interior">
+      <p class="chip chip--contorno portada__anuncio">
+        Consultoría para gobiernos
+        <span class="destacado">estatales y municipales</span>
+      </p>
 
       <h1 class="display portada__titular">
-        Fortalecemos la gestión pública de los gobiernos estatales y municipales
-        mediante soluciones técnicas y financieras.
+        Decisiones públicas con <span class="acento">respaldo</span> técnico
       </h1>
 
       <p class="portada__texto">
@@ -33,46 +38,39 @@ import { servicios, principios } from '../data/site.js';
         <a class="boton" href="/servicios/">
           Ver servicios <span class="flecha" aria-hidden="true">→</span>
         </a>
-        <a class="boton boton--linea" href="/contacto/">Conversemos</a>
+        <a class="boton boton--fantasma" href="/contacto/">Conversemos</a>
       </div>
-    </div>
 
-    <!-- Principios anclados al pie de la banda -->
-    <div class="contenedor">
-      <div class="principios">
-        {principios.map((p, i) => (
-          <article class="principio">
-            <span class="principio__numero">
-              {String(i + 1).padStart(2, '0')}
-            </span>
-            <h2>{p.titulo}</h2>
-            <p>{p.texto}</p>
-          </article>
-        ))}
+      <!-- Tira de confianza: en lugar de logotipos de clientes, que aún no
+           se pueden publicar, los tres principios del guion. -->
+      <div class="tira">
+        <p class="tira__intro etiqueta">Cómo trabajamos</p>
+        <ul class="tira__lista">
+          {principios.map((p) => (
+            <li>
+              <strong>{p.titulo}.</strong> {p.texto}
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   </section>
 
-  <!-- 02 · Servicios -->
-  <section class="seccion seccion--superficie">
+  <!-- 02 · Servicios, banda clara -->
+  <section class="banda banda--hueso">
     <div class="contenedor">
       <div class="encabezado">
-        <div>
-          <span class="etiqueta">02 — Servicios</span>
-        </div>
-        <div class="flujo">
-          <h2 class="titulo-seccion">
-            Servicios modulares que pueden contratarse por separado o integrarse
-            en programas de fortalecimiento institucional.
-          </h2>
-          <p class="entradilla medida">
-            Seis líneas de trabajo que cubren desde la formación de equipos
-            hasta el diagnóstico financiero y la mejora de procesos.
-          </p>
-        </div>
+        <p class="etiqueta">02 — Servicios</p>
+        <h2 class="display--sm">
+          Seis líneas de <span class="acento">trabajo</span>
+        </h2>
+        <p class="entradilla">
+          Servicios modulares que pueden contratarse individualmente o
+          integrarse en programas de fortalecimiento institucional.
+        </p>
       </div>
 
-      <div class="rejilla rejilla--3 rejilla--separada">
+      <div class="rejilla rejilla--3">
         {servicios.map((s, i) => (
           <a
             class="tarjeta tarjeta--enlace tarjeta--interactiva revelar"
@@ -93,22 +91,53 @@ import { servicios, principios } from '../data/site.js';
     </div>
   </section>
 
-  <!-- 03 · A quiénes servimos -->
-  <section class="seccion">
-    <div class="contenedor">
-      <div class="encabezado">
-        <div>
-          <span class="etiqueta">03 — Clientes</span>
-        </div>
-        <div class="flujo">
-          <h2 class="titulo-seccion">
-            Instituciones públicas que buscan decidir con mejor información.
+  <!-- 03 · Entregables, banda oscura con pila flotante -->
+  <section class="banda banda--oscura">
+    <Orbe posicion="izquierda" tono="indigo" />
+    <div class="contenedor banda__interior">
+      <div class="dos-tercios">
+        <div class="dos-tercios__copia">
+          <p class="etiqueta">Qué recibe la institución</p>
+          <h2 class="titulo-banda">
+            Análisis que se traduce en <span class="acento">decisiones</span>,
+            no en documentos archivados.
           </h2>
+          <p class="entradilla">
+            Cada trabajo cierra con productos concretos: modelos financieros,
+            matrices de evaluación, hojas de ruta con responsables e
+            indicadores para dar seguimiento a los resultados.
+          </p>
+          <p>
+            <a class="enlace" href="/clientes/">
+              Cómo colaboramos <span aria-hidden="true">→</span>
+            </a>
+          </p>
+        </div>
+
+        <div class="dos-tercios__visual">
+          <Entregables />
         </div>
       </div>
+    </div>
+  </section>
 
-      <div class="rejilla rejilla--3 rejilla--pegada">
-        <article class="tarjeta">
+  <!-- 04 · Clientes, banda blanca -->
+  <section class="banda banda--clara">
+    <div class="contenedor">
+      <div class="encabezado encabezado--centro">
+        <p class="etiqueta">03 — Clientes</p>
+        <h2 class="display--sm">
+          Instituciones que deciden con mejor
+          <span class="acento">información</span>
+        </h2>
+        <p class="entradilla">
+          Trabajamos con organismos públicos que buscan fortalecer sus
+          capacidades técnicas y su gestión financiera.
+        </p>
+      </div>
+
+      <div class="rejilla rejilla--3">
+        <article class="tarjeta revelar">
           <span class="tarjeta__numero">01</span>
           <h3>Gobiernos municipales</h3>
           <p>
@@ -116,7 +145,7 @@ import { servicios, principios } from '../data/site.js';
             planeación y evaluación.
           </p>
         </article>
-        <article class="tarjeta">
+        <article class="tarjeta revelar">
           <span class="tarjeta__numero">02</span>
           <h3>Gobiernos estatales</h3>
           <p>
@@ -124,7 +153,7 @@ import { servicios, principios } from '../data/site.js';
             ejecutoras de proyectos.
           </p>
         </article>
-        <article class="tarjeta">
+        <article class="tarjeta revelar">
           <span class="tarjeta__numero">03</span>
           <h3>Organismos públicos</h3>
           <p>
@@ -133,12 +162,6 @@ import { servicios, principios } from '../data/site.js';
           </p>
         </article>
       </div>
-
-      <p class="mas">
-        <a class="enlace" href="/clientes/">
-          Cómo colaboramos <span aria-hidden="true">→</span>
-        </a>
-      </p>
     </div>
   </section>
 
@@ -153,115 +176,105 @@ import { servicios, principios } from '../data/site.js';
   /* ------------------------------------------------------------ Portada */
 
   .portada {
-    position: relative;
-    overflow: hidden;
-    background: var(--negro);
-    color: var(--blanco);
-    padding-block: clamp(3.5rem, 8vw, 6.5rem) 0;
+    /* La píldora flota encima: hay que dejarle sitio arriba */
+    padding-block: clamp(7rem, 13vw, 11rem) clamp(3rem, 6vw, 5rem);
+    margin-top: calc(-1 * (3.5rem + var(--e16) * 2));
   }
 
   .portada__interior {
-    position: relative;
-    z-index: 1;
-    padding-bottom: clamp(3rem, 6vw, 5rem);
+    display: grid;
+    justify-items: start;
   }
 
-  .portada .etiqueta {
-    color: var(--gris-texto);
-    margin-bottom: clamp(1.5rem, 3vw, 2.25rem);
+  .portada__anuncio {
+    margin-bottom: var(--e32);
   }
 
   .portada__titular {
-    max-width: 17ch;
+    max-width: 14ch;
     color: var(--blanco);
   }
 
   .portada__texto {
-    max-width: 56ch;
-    margin-top: clamp(1.5rem, 3vw, 2.25rem);
-    font-size: clamp(1rem, 1.3vw, 1.125rem);
-    line-height: 1.7;
-    color: var(--gris-claro);
+    max-width: 38rem;
+    margin-top: var(--e32);
+    font-size: clamp(1rem, 1.4vw, 1.125rem);
+    line-height: 1.5;
+    color: var(--tinta-inv-sec);
   }
 
   .portada__acciones {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.75rem;
-    margin-top: clamp(2rem, 4vw, 2.75rem);
+    gap: var(--e8);
+    margin-top: var(--e40);
   }
 
-  /* Tira de principios al pie de la banda, separada por filetes */
-  .principios {
-    position: relative;
-    z-index: 1;
-    display: grid;
+  /* Tira de confianza bajo el llamado principal */
+  .tira {
+    width: 100%;
+    margin-top: clamp(3rem, 7vw, 5rem);
+    padding-top: var(--e32);
     border-top: 1px solid var(--linea-oscura);
   }
 
-  @media (min-width: 48rem) {
-    .principios {
-      grid-template-columns: repeat(3, 1fr);
-    }
-    .principio + .principio {
-      border-left: 1px solid var(--linea-oscura);
-    }
+  .tira__intro {
+    margin-bottom: var(--e24);
   }
 
-  .principio {
-    padding: clamp(1.75rem, 3vw, 2.5rem) clamp(0rem, 2.5vw, 2rem)
-      clamp(1.75rem, 3vw, 2.5rem) 0;
-  }
-  @media (min-width: 48rem) {
-    .principio + .principio {
-      padding-left: clamp(1.5rem, 2.5vw, 2rem);
-    }
-  }
-  @media (max-width: 47.99rem) {
-    .principio + .principio {
-      border-top: 1px solid var(--linea-oscura);
-    }
-  }
-
-  .principio__numero {
-    display: block;
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.18em;
-    color: var(--gris-texto);
-    margin-bottom: 1rem;
-    font-variant-numeric: tabular-nums;
-  }
-
-  .principio h2 {
-    font-size: 1.0625rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .principio p {
+  .tira__lista {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: var(--e24);
     font-size: 0.9375rem;
-    line-height: 1.65;
-    color: var(--gris-claro);
-    max-width: 34ch;
+    line-height: 1.5;
+    color: var(--tinta-inv-sec);
+  }
+  .tira__lista strong {
+    display: block;
+    font-weight: 600;
+    color: var(--blanco);
+    margin-bottom: 2px;
   }
 
-  /* ----------------------------------------------------------- Servicios */
+  @media (min-width: 48rem) {
+    .tira__lista {
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--e32);
+    }
+  }
+
+  /* --------------------------------------------------- Banda dos tercios */
+
+  .dos-tercios {
+    display: grid;
+    gap: clamp(2.5rem, 5vw, 4rem);
+    align-items: center;
+  }
+
+  @media (min-width: 62rem) {
+    .dos-tercios {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
+    }
+  }
+
+  .dos-tercios__copia > * + * {
+    margin-top: var(--e24);
+  }
+
+  /* --------------------------------------------------------- Servicios */
 
   .tarjeta__pie {
     margin-top: auto;
-    padding-top: 0.75rem;
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--tinta-meta);
-    transition: color var(--transicion);
+    padding-top: var(--e8);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--indigo);
+    transition: transform var(--transicion);
   }
   .tarjeta--interactiva:hover .tarjeta__pie {
-    color: var(--negro);
-  }
-
-  .mas {
-    margin-top: clamp(2rem, 4vw, 2.75rem);
+    transform: translateX(3px);
   }
 </style>

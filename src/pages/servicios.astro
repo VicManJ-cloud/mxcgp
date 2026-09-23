@@ -12,13 +12,14 @@ import { servicios } from '../data/site.js';
 >
   <CabeceraPagina
     etiqueta="02 — Servicios de consultoría"
-    titulo="Servicios modulares, contratables por separado o integrados en un programa"
-    entrada="Seis líneas de trabajo para fortalecer las capacidades técnicas, la gestión financiera y los procesos de las instituciones públicas."
+    titulo="Seis líneas de"
+    acento="trabajo"
+    entrada="Servicios modulares que pueden contratarse individualmente o integrarse en programas de fortalecimiento institucional."
   />
 
-  <section class="seccion seccion--superficie">
+  <section class="banda banda--hueso">
     <div class="contenedor">
-      <div class="rejilla rejilla--2 rejilla--separada">
+      <div class="rejilla rejilla--2">
         {servicios.map((s, i) => (
           <article class="tarjeta tarjeta--servicio revelar" id={s.id}>
             <div class="tarjeta__cabecera">
@@ -37,21 +38,21 @@ import { servicios } from '../data/site.js';
 
   <Cierre
     etiqueta="Siguiente paso"
-    titulo="Cuéntanos el reto de tu institución y diseñemos una propuesta de trabajo."
+    titulo="Cuéntanos el reto de tu institución y diseñemos una"
+    acento="propuesta"
     boton="Escríbenos"
   />
 </Base>
 
 <style>
-  /* Compensa la cabecera fija al llegar por ancla desde el inicio */
   .tarjeta--servicio {
-    scroll-margin-top: 6.5rem;
+    scroll-margin-top: 7rem;
   }
   .tarjeta--servicio:target {
-    border-color: var(--negro);
-    box-shadow: inset 0 3px 0 var(--negro);
+    border-color: var(--indigo);
+    background: var(--indigo-lavado);
   }
   .tarjeta--servicio h2 {
-    font-size: clamp(1.125rem, 1.7vw, 1.3125rem);
+    font-size: 1.1875rem;
   }
 </style>

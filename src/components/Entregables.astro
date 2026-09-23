@@ -1,0 +1,225 @@
+---
+/**
+ * Pila de entregables flotantes.
+ *
+ * La referencia pide capturas de producto inclinadas. Una consultoría no
+ * tiene interfaz que mostrar: su producto son estudios y tableros. Estas
+ * tarjetas son representaciones ESQUEMÁTICAS de ese trabajo —tipo de
+ * documento y estructura—, deliberadamente sin cifras, porcentajes ni
+ * nombres de instituciones, para no afirmar resultados que no existen.
+ *
+ * Son decorativas: todo el bloque va aria-hidden y el contenido real de
+ * la sección vive en el texto de al lado.
+ */
+---
+
+<div class="entregables" aria-hidden="true">
+  <!-- Trasera: tablero de indicadores -->
+  <article class="ficha ficha--trasera">
+    <header class="ficha__cabecera">
+      <span class="ficha__titulo">Indicadores de seguimiento</span>
+      <span class="ficha__chip">Trimestral</span>
+    </header>
+    <ul class="ficha__filas">
+      <li>
+        <span class="ficha__barra ficha__barra--larga"></span>
+        <span class="ficha__estado ficha__estado--ok"></span>
+      </li>
+      <li>
+        <span class="ficha__barra ficha__barra--media"></span>
+        <span class="ficha__estado ficha__estado--medio"></span>
+      </li>
+      <li>
+        <span class="ficha__barra ficha__barra--larga"></span>
+        <span class="ficha__estado ficha__estado--ok"></span>
+      </li>
+      <li>
+        <span class="ficha__barra ficha__barra--corta"></span>
+        <span class="ficha__estado"></span>
+      </li>
+    </ul>
+  </article>
+
+  <!-- Frontal: evaluación socioeconómica -->
+  <article class="ficha ficha--frontal">
+    <header class="ficha__cabecera">
+      <span class="ficha__titulo">Evaluación socioeconómica</span>
+      <span class="ficha__chip ficha__chip--acento">Proyecto</span>
+    </header>
+
+    <p class="ficha__nota">Flujo de costos y beneficios</p>
+
+    <div class="ficha__grafica">
+      <span style="--h: 38%"></span>
+      <span style="--h: 54%"></span>
+      <span style="--h: 46%"></span>
+      <span style="--h: 72%"></span>
+      <span style="--h: 64%" class="es-acento"></span>
+      <span style="--h: 88%" class="es-acento"></span>
+    </div>
+
+    <footer class="ficha__pie">
+      <span class="ficha__barra ficha__barra--media"></span>
+      <span class="ficha__barra ficha__barra--corta"></span>
+    </footer>
+  </article>
+</div>
+
+<style>
+  .entregables {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    min-height: clamp(20rem, 34vw, 27rem);
+    padding-block: var(--e24);
+  }
+
+  .ficha {
+    position: absolute;
+    width: min(100%, 23rem);
+    padding: var(--e24);
+    border-radius: var(--r-tarjeta-lg);
+    background: var(--papel);
+    color: var(--tinta);
+    box-shadow: var(--sombra-flotante);
+  }
+
+  /* Inclinación leve y pila de dos: sin esto las tarjetas planas
+     desaparecen sobre el lienzo oscuro. */
+  .ficha--trasera {
+    transform: rotate(-6deg) translate(-11%, -13%) scale(0.94);
+    opacity: 0.92;
+  }
+
+  .ficha--frontal {
+    transform: rotate(3.5deg) translate(9%, 11%);
+  }
+
+  .ficha__cabecera {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--e16);
+    margin-bottom: var(--e16);
+  }
+
+  .ficha__titulo {
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+  }
+
+  .ficha__chip {
+    padding: 0.125rem 0.625rem;
+    border-radius: var(--r-chip);
+    background: var(--hueso);
+    color: var(--tinta-sec);
+    font-size: 0.6875rem;
+    font-weight: 500;
+  }
+  .ficha__chip--acento {
+    background: var(--indigo-lavado);
+    color: var(--indigo);
+  }
+
+  .ficha__nota {
+    font-size: 0.75rem;
+    color: var(--tinta-meta);
+    margin-bottom: var(--e16);
+  }
+
+  /* Gráfica esquemática: proporciones, nunca cifras */
+  .ficha__grafica {
+    display: flex;
+    align-items: flex-end;
+    gap: var(--e8);
+    height: 6rem;
+    padding-bottom: var(--e8);
+    border-bottom: 1px solid var(--linea);
+  }
+  .ficha__grafica span {
+    flex: 1;
+    height: var(--h);
+    border-radius: 4px 4px 0 0;
+    background: var(--linea);
+  }
+  .ficha__grafica .es-acento {
+    background: var(--indigo);
+  }
+
+  .ficha__filas {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.6875rem;
+  }
+  .ficha__filas li {
+    display: flex;
+    align-items: center;
+    gap: var(--e16);
+  }
+
+  .ficha__barra {
+    height: 6px;
+    border-radius: 3px;
+    background: var(--linea);
+  }
+  .ficha__barra--larga {
+    width: 72%;
+  }
+  .ficha__barra--media {
+    width: 48%;
+  }
+  .ficha__barra--corta {
+    width: 28%;
+  }
+
+  .ficha__estado {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    margin-left: auto;
+    background: var(--linea-fuerte);
+    flex-shrink: 0;
+  }
+  .ficha__estado--ok {
+    background: var(--indigo);
+  }
+  .ficha__estado--medio {
+    background: var(--ambar);
+  }
+
+  .ficha__pie {
+    display: grid;
+    gap: 0.6875rem;
+    margin-top: var(--e16);
+  }
+
+  @media (max-width: 47.99rem) {
+    .ficha {
+      width: min(100%, 19rem);
+      padding: 1.25rem;
+    }
+    .ficha--trasera {
+      transform: rotate(-5deg) translate(-8%, -12%) scale(0.93);
+    }
+    .ficha--frontal {
+      transform: rotate(3deg) translate(7%, 10%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ficha--trasera,
+    .ficha--frontal {
+      transform: none;
+      position: relative;
+      margin-bottom: var(--e16);
+    }
+    .entregables {
+      display: block;
+      min-height: 0;
+    }
+  }
+</style>

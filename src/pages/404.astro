@@ -1,24 +1,25 @@
 ---
 import Base from '../layouts/Base.astro';
-import MarcaFondo from '../components/MarcaFondo.astro';
+import Orbe from '../components/Orbe.astro';
 ---
 
 <Base titulo="Página no encontrada">
-  <section class="error">
-    <MarcaFondo />
-    <div class="contenedor error__interior">
+  <section class="banda--oscura error">
+    <Orbe posicion="derecha" tono="indigo" />
+    <div class="contenedor banda__interior error__interior">
       <p class="etiqueta">Error 404</p>
-      <h1 class="error__titulo">
-        La página que buscas no existe o cambió de dirección.
+      <h1 class="display--sm error__titulo">
+        Esta página no <span class="acento">existe</span>
       </h1>
       <p class="error__texto">
-        Revisa la dirección o vuelve al inicio para continuar navegando.
+        La dirección cambió o nunca estuvo aquí. Vuelve al inicio para continuar
+        navegando.
       </p>
       <p class="error__acciones">
         <a class="boton" href="/">
           Ir al inicio <span class="flecha" aria-hidden="true">→</span>
         </a>
-        <a class="boton boton--linea" href="/contacto/">Contacto</a>
+        <a class="boton boton--fantasma" href="/contacto/">Contacto</a>
       </p>
     </div>
   </section>
@@ -26,39 +27,36 @@ import MarcaFondo from '../components/MarcaFondo.astro';
 
 <style>
   .error {
-    position: relative;
-    overflow: hidden;
-    background: var(--negro);
-    color: var(--blanco);
-    padding-block: clamp(4rem, 10vw, 7.5rem);
+    padding-block: clamp(8rem, 15vw, 12rem);
+    margin-top: calc(-1 * (3.5rem + var(--e16) * 2));
   }
 
   .error__interior {
-    position: relative;
-    z-index: 1;
+    display: grid;
+    justify-items: center;
+    text-align: center;
   }
 
   .error .etiqueta {
-    color: var(--gris-texto);
-    margin-bottom: 1.5rem;
+    margin-bottom: var(--e24);
   }
 
   .error__titulo {
-    max-width: 20ch;
-    font-size: clamp(1.9rem, 4.4vw, 3rem);
-    letter-spacing: -0.035em;
-    margin-bottom: 1.25rem;
+    max-width: 16ch;
+    color: var(--blanco);
+    margin-bottom: var(--e16);
   }
 
   .error__texto {
-    max-width: 48ch;
-    color: var(--gris-claro);
+    max-width: 40ch;
+    color: var(--tinta-inv-sec);
   }
 
   .error__acciones {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.75rem;
-    margin-top: 2.25rem;
+    justify-content: center;
+    gap: var(--e8);
+    margin-top: var(--e32);
   }
 </style>
