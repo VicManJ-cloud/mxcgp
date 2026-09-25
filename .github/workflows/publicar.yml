@@ -34,7 +34,16 @@ jobs:
           cache-dependency-path: sitio/package-lock.json
       - id: pages
         uses: actions/configure-pages@v5
-      - run: npm ci
+      # Si la instalación falla, las últimas líneas salen como anotaciones:
+      # así se leen desde el resumen de la ejecución sin abrir el registro.
+      - name: Instalar dependencias
+        shell: bash  # con pipefail, para que el fallo de npm no lo tape tee
+        run: |
+          node -v; npm -v
+          npm ci 2>&1 | tee npm-ci.log || {
+            tail -n 25 npm-ci.log | while IFS= read -r l; do echo "::error::$l"; done
+            exit 1
+          }
       - run: npm run build
         env:
           SITIO_URL: ${{ steps.pages.outputs.origin }}
