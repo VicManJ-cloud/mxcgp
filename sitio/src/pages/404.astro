@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import Orbe from '../components/Orbe.astro';
+import { ruta } from '../data/site.js';
 ---
 
 <Base titulo="Página no encontrada">
@@ -16,10 +17,10 @@ import Orbe from '../components/Orbe.astro';
         navegando.
       </p>
       <p class="error__acciones">
-        <a class="boton" href="/">
+        <a class="boton" href={ruta('/')}>
           Ir al inicio <span class="flecha" aria-hidden="true">→</span>
         </a>
-        <a class="boton boton--fantasma" href="/contacto/">Contacto</a>
+        <a class="boton boton--fantasma" href={ruta('/contacto/')}>Contacto</a>
       </p>
     </div>
   </section>

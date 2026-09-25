@@ -1,12 +1,13 @@
 ---
 import Orbe from './Orbe.astro';
+import { ruta } from '../data/site.js';
 
 const {
   etiqueta = 'Siguiente paso',
   titulo,
   acento,
   boton = 'Escríbenos',
-  href = '/contacto/',
+  href = ruta('/contacto/'),
 } = Astro.props;
 ---
 

@@ -7,13 +7,15 @@ import '@fontsource/instrument-serif/400-italic.css';
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { empresa } from '../data/site.js';
+import { empresa, ruta } from '../data/site.js';
 
 const { titulo, descripcion = empresa.descripcion } = Astro.props;
 const tituloCompleto = titulo
   ? `${titulo} · ${empresa.nombreCorto}`
   : empresa.nombre;
 const canonical = new URL(Astro.url.pathname, Astro.site);
+// Fuera del dominio definitivo (vista previa) no queremos que Google indexe.
+const esVistaPrevia = Astro.site?.hostname !== 'cgpmx.com';
 ---
 
 <!doctype html>
@@ -24,7 +26,8 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <title>{tituloCompleto}</title>
     <meta name="description" content={descripcion} />
     <link rel="canonical" href={canonical} />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href={ruta('/favicon.svg')} type="image/svg+xml" />
+    {esVistaPrevia && <meta name="robots" content="noindex, nofollow" />}
     <meta name="theme-color" content="#111218" />
 
     <meta property="og:type" content="website" />
@@ -35,7 +38,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta property="og:url" content={canonical} />
     <meta
       property="og:image"
-      content={new URL('/logo/mx-horizontal.png', Astro.site)}
+      content={new URL(ruta('/logo/mx-horizontal.png'), Astro.site)}
     />
     <meta name="twitter:card" content="summary_large_image" />
   </head>

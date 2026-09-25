@@ -4,7 +4,7 @@ import Orbe from '../components/Orbe.astro';
 import Entregables from '../components/Entregables.astro';
 import Glifo from '../components/Glifo.astro';
 import Cierre from '../components/Cierre.astro';
-import { servicios, principios } from '../data/site.js';
+import { servicios, principios, ruta } from '../data/site.js';
 ---
 
 <Base
@@ -35,10 +35,10 @@ import { servicios, principios } from '../data/site.js';
       </p>
 
       <div class="portada__acciones">
-        <a class="boton" href="/servicios/">
+        <a class="boton" href={ruta('/servicios/')}>
           Ver servicios <span class="flecha" aria-hidden="true">→</span>
         </a>
-        <a class="boton boton--fantasma" href="/contacto/">Conversemos</a>
+        <a class="boton boton--fantasma" href={ruta('/contacto/')}>Conversemos</a>
       </div>
 
       <!-- Tira de confianza: en lugar de logotipos de clientes, que aún no
@@ -108,7 +108,7 @@ import { servicios, principios } from '../data/site.js';
             indicadores para dar seguimiento a los resultados.
           </p>
           <p>
-            <a class="enlace" href="/clientes/">
+            <a class="enlace" href={ruta('/clientes/')}>
               Cómo colaboramos <span aria-hidden="true">→</span>
             </a>
           </p>

@@ -7,12 +7,17 @@ export const empresa = {
     'Consultoría especializada en capacitación, evaluación de proyectos, finanzas públicas y diagnóstico institucional para gobiernos estatales y municipales.',
 };
 
+// Antepone la ruta base del despliegue. En el dominio definitivo es '/', pero
+// la vista previa en GitHub Pages vive bajo /<repositorio>/.
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+export const ruta = (camino) => base + camino;
+
 export const navegacion = [
-  { texto: 'Inicio', href: '/' },
-  { texto: 'Servicios de consultoría', href: '/servicios/' },
-  { texto: 'Clientes', href: '/clientes/' },
-  { texto: 'Nosotros', href: '/nosotros/' },
-  { texto: 'Contacto', href: '/contacto/' },
+  { texto: 'Inicio', href: ruta('/') },
+  { texto: 'Servicios de consultoría', href: ruta('/servicios/') },
+  { texto: 'Clientes', href: ruta('/clientes/') },
+  { texto: 'Nosotros', href: ruta('/nosotros/') },
+  { texto: 'Contacto', href: ruta('/contacto/') },
 ];
 
 export const servicios = [

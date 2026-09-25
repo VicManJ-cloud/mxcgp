@@ -1,16 +1,16 @@
 ---
 import Logotipo from './Logotipo.astro';
-import { navegacion, empresa } from '../data/site.js';
+import { navegacion, empresa, ruta } from '../data/site.js';
 const actual = Astro.url.pathname;
 const esActivo = (href) =>
-  href === '/' ? actual === '/' : actual.startsWith(href);
+  href === ruta('/') ? actual === href : actual.startsWith(href);
 ---
 
 <header class="cabecera" data-cabecera>
   <div class="cabecera__pista">
     <!-- El logotipo va suelto sobre el lienzo, sin contenedor propio: así
          su tamaño no depende de ninguna caja. -->
-    <a class="marca" href="/" aria-label={`${empresa.nombre} — Inicio`}>
+    <a class="marca" href={ruta('/')} aria-label={`${empresa.nombre} — Inicio`}>
       <Logotipo variante="horizontal" />
     </a>
 
@@ -31,7 +31,7 @@ const esActivo = (href) =>
         </ul>
       </nav>
 
-      <a class="pildora__cta" href="/contacto/">Agendar una conversación</a>
+      <a class="pildora__cta" href={ruta('/contacto/')}>Agendar una conversación</a>
 
       <button
         class="pildora__toggle"
