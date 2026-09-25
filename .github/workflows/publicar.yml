@@ -39,9 +39,9 @@ jobs:
       - name: Instalar dependencias
         shell: bash  # con pipefail, para que el fallo de npm no lo tape tee
         run: |
-          node -v; npm -v
+          echo "::notice::node $(node -v) npm $(npm -v)"
           npm ci 2>&1 | tee npm-ci.log || {
-            tail -n 25 npm-ci.log | while IFS= read -r l; do echo "::error::$l"; done
+            grep -iE "missing|invalid|sync|ERESOLVE|engine|version" npm-ci.log | head -n 9 | while IFS= read -r l; do echo "::error::$l"; done
             exit 1
           }
       - run: npm run build
